@@ -1,8 +1,7 @@
 'use strict';
-
 function Invader() {
   this.element = createInvaderCanvas();
-  this.collider = new Collider(this.element)
+  this.collider = new Collider(this.element);
 }
 
 function createInvaderCanvas(){
@@ -14,6 +13,6 @@ function createInvaderCanvas(){
   // later we should have it do some Canvas magic to select from a sprite sheet.
   const sourceImg = document.getElementById('source');
   canvas.getContext('2d').drawImage(sourceImg, 0, 0);
-  gameScreen.append(canvas);
+  gameScreen.element.append(canvas);
   return canvas;
 }

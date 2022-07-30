@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 let shipCtx = document.querySelector('.spaceship-canvas').getContext('2d');
 
-shipCtx.fillStyle = '#2424aa'
+shipCtx.fillStyle = '#2424aa';
 drawRect(0, 4, 11, 3);
 drawRect(1, 3, 9, 1);
 drawRect(4, 1, 3, 2);

@@ -1,5 +1,11 @@
 'use strict';
-const gameScreen = document.getElementById('gameScreen');
+
+function GameScreen() {
+  this.element = document.getElementById('gameScreen');
+}
+
+const gameScreen = new GameScreen();
+// const gameScreen = document.getElementById('gameScreen');
 
 const animationState = {
   reset: false,

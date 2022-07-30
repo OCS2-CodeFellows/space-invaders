@@ -1,4 +1,4 @@
-
+'use strict'
 
 
 const spaceship = {
@@ -17,15 +17,11 @@ const bullets = [];
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === 'a') {
-      isMoving = true;
-      moveDirection = 'left';
       // speed -= 0.1
       // window.requestAnimationFrame(moveLoop)
       move(spaceship, 'left');
     }
     if (e.key === 'd') {
-      isMoving = true;
-      moveDirection = 'right';
       // speed -= 0.1
       // window.requestAnimationFrame(moveLoop)
       move(spaceship, 'right');
@@ -35,7 +31,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('keyup', (e) => {
-  const gameScreenCollider = gameScreen.getBoundingClientRect();
+  const gameScreenCollider = gameScreen.element.getBoundingClientRect();
   if (e.key === 'a') {
     const shipCollider = spaceship.element.getBoundingClientRect();
     spaceship.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
@@ -50,7 +46,7 @@ window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === ' ' && bullets.length <= 3) {
       console.log('pew');
-      newBullet = createBullet();
+      const newBullet = createBullet();
     }
   }
 });
@@ -62,7 +58,16 @@ window.addEventListener('keydown', (e) => {
 // So we need to only stop it if the instance array of Bullets is empty. Not every time a collision happens!
 // We need to create a way to check if a bullet has collided with an enemy or the screen, then get THAT bullet out of the array.
 
-
+function removeBullet(bullet) {
+  for (let i = 0; i < bullets.length; i++) {
+    const checkBullet = bullets[i];
+    if (bullet.element === checkBullet.element) {
+      bullet.collider.removeInstance();
+      bullets[i].element.remove();
+      bullets.splice(i, 1);
+    }
+  }
+}
 
 function bulletFrame(timestamp) {
   animationState.done = false;
@@ -78,22 +83,25 @@ function bulletFrame(timestamp) {
   // console.log("PREVIOUS", animationState.previousTimestamp)
   // console.log("CURRENT", timestamp)
   if (animationState.previousTimestamp !== timestamp) {
-    for (bullet of bullets) {
+    for (let bullet of bullets) {
       let spaceFromBottom = parseInt(bullet.element.style.bottom.replace('px', ''));
       bullet.element.style.bottom = `${spaceFromBottom += 5}px`;
+      const bulletRect = bullet.element.getBoundingClientRect();
+      const screenRect = gameScreen.element.getBoundingClientRect();
+      if (bulletRect.top === screenRect.top) {
+        removeBullet(bullet);
+      }
     }
     const collision = Collider.checkCollisions();
     if (collision) {
-      const bulletIndex = bullets.findIndex(checkBullet => {
-        for (collider of collision) {
-          if (collider.element === checkBullet.element) {
-            return checkBullet.element === collider.element;
+      for (let bullet of bullets) {
+        for (let collider of collision) {
+          if (collider.element === bullet.element) {
+            removeBullet(bullet);
+
           }
         }
-      });
-      
-      bullets[bulletIndex].element.remove();
-      bullets.splice(bulletIndex, 1);
+      }
 
     }
     if (!bullets.length) animationState.done = true;
@@ -109,8 +117,8 @@ function bulletFrame(timestamp) {
 
 function move(target, direction) {
   const velocity = 300;
-  targetCollider = target.element.getBoundingClientRect();
-  const gameScreenCollider = gameScreen.getBoundingClientRect();
+  const targetCollider = target.element.getBoundingClientRect();
+  const gameScreenCollider = gameScreen.element.getBoundingClientRect();
   console.log('GAME SCREEN COLLIDER', gameScreenCollider);
   console.log('SHIP COLLIDER', targetCollider);
 
@@ -158,11 +166,11 @@ function createBullet() {
   const bulletCtx = bulletCanvas.getContext('2d');
   bulletCtx.fillStyle = '#cccccc'; 
   bulletCtx.fillRect(0, 0, 5, 10);
-  gameScreen.append(bulletCanvas);
+  gameScreen.element.append(bulletCanvas);
   bulletCanvas.style.position = 'absolute';
   bulletCanvas.style.bottom = '45px';
   // Redo this algorithm, or function it out.
-  bulletCanvas.style.left = `${spaceship.element.getBoundingClientRect().left - gameScreen.getBoundingClientRect().left + 25}px`;
+  bulletCanvas.style.left = `${spaceship.element.getBoundingClientRect().left - gameScreen.element.getBoundingClientRect().left + 25}px`;
   bullet.element = bulletCanvas;
   bullet.collider = new Collider(bullet.element, true);
   window.requestAnimationFrame(bulletFrame);
