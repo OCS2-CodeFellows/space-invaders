@@ -5,10 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/consts.js" defer></script>
+  <script src="js/Collider.js" defer></script>
+  <script src="js/draw-ship.js" defer></script>
+  <script src="js/draw-invader.js" defer></script>
   <script src="js/app.js" defer></script>
-  <title>Document</title>
+  <title>Space Invaders</title>
 </head>
 <body>
-  
+  <header>
+    <h1>Space Invaders</h1>
+  </header>
+  <main>
+    <div class="game-screen" id="gameScreen">
+      <div style="display: none;">
+        <img id="source" src="assets/red-invader.png" width="55" height="40" alt="">
+      </div>
+      <canvas class="spaceship-canvas" width="55" height="35"></canvas>
+      <canvas class="invader-canvas" width="55" height="40"></canvas>
+    </div>
+  </main>
+  <footer>
+    Copyright (c) 2022 Robert Shepley
+  </footer>
 </body>
 </html>

@@ -1,0 +1,54 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242424;
+  color: #cccccc
+}
+
+header,
+main,
+footer {
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+}
+
+.game-screen {
+  box-sizing: border-box;
+  width: 600px;
+  height: 800px;
+  background-color: #121212;
+  position: relative;
+}
+
+.spaceship-canvas {
+  position: absolute;
+  bottom: 5px;
+}
+
+.invader-canvas {
+  position: absolute;
+  bottom: 6px;
+  left: 200px;
+}
+
+/* .spaceship {
+  width: 6%;
+  position: absolute;
+  bottom: 1%; */
+/* transition-property: transform; */
+/* transition-duration: 2s; */
+/* } */
+
+/* .spaceship-canvas {
+  height: 100px;
+  width: 100px;
+} */
+
+footer {
+  margin-top: auto;
+}
