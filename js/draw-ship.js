@@ -34,10 +34,9 @@ PlayerShip.prototype.move = function(direction) {
   console.log('DISTANCE MOVED', distance);
   console.log('SECONDS ANIMATED', seconds);
   console.log('VELOCITY', (distance / seconds));
+  // Use CSS transitions to move the ship. May update this to use a similar logic to the bullet animations.
   this.element.style.transition = `transform ${seconds}s linear`;
   this.element.style.transform = (`translateX(${this.position}px)`);
-  // reset = true
-  // window.requestAnimationFrame(frame)
 }
 
 function createPlayerCanvas(){

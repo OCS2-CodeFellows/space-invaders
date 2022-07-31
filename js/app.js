@@ -1,30 +1,18 @@
 'use strict';
 
-
-// const spaceship = {
-//   element: document.querySelector('.spaceship-canvas'),
-//   position: 0,
-// };
-
-// spaceship.collider = new Collider(spaceship.element, true);
 const player = new PlayerShip();
 const invader = new Invader();
 
-
-const bullets = [];
+// Start the animation loop
 render();
 
 // Keydown
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === 'a') {
-      // speed -= 0.1
-      // window.requestAnimationFrame(moveLoop)
       player.move('left');
     }
     if (e.key === 'd') {
-      // speed -= 0.1
-      // window.requestAnimationFrame(moveLoop)
       player.move('right');
 
     }
@@ -47,29 +35,11 @@ window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === ' ' && Bullet.instances.length < constants.MAXBULLETS) {
       console.log('pew');
-      const newBullet = new Bullet();
-      // createBullet()
+      new Bullet();
     }
   }
 });
 
-
-
-// NOTE - Need to create a bullet class/constructor
-// bulletFrame should run any time there is a bullet on-screen
-// So we need to only stop it if the instance array of Bullets is empty. Not every time a collision happens!
-// We need to create a way to check if a bullet has collided with an enemy or the screen, then get THAT bullet out of the array.
-
-// function removeBullet(bullet) {
-//   for (let i = 0; i < bullets.length; i++) {
-//     const checkBullet = bullets[i];
-//     if (bullet.element === checkBullet.element) {
-//       bullet.collider.removeInstance();
-//       bullets[i].element.remove();
-//       bullets.splice(i, 1);
-//     }
-//   }
-// }
 // This function runs on every frame.
 function animationFrame(timestamp) {
 
@@ -137,36 +107,6 @@ function animationFrame(timestamp) {
   }
 }
 
-
-
-//TODO: Implement bullets as an object constructor
-// function Bullet() {
-//   this.element = document.createElement('canvas');
-
-// }
-function createBullet() {
-  const bullet = {
-
-  };
-  const bulletCanvas = document.createElement('canvas');
-  bulletCanvas.classList.add('bullet');
-  bulletCanvas.width = '5';
-  bulletCanvas.height = '10';
-  const bulletCtx = bulletCanvas.getContext('2d');
-  bulletCtx.fillStyle = '#cccccc'; 
-  bulletCtx.fillRect(0, 0, 5, 10);
-  gameScreen.element.append(bulletCanvas);
-  bulletCanvas.style.position = 'absolute';
-  bulletCanvas.style.bottom = '40px';
-  // Redo this algorithm, or function it out.
-  bulletCanvas.style.left = `${player.element.getBoundingClientRect().left - gameScreen.element.getBoundingClientRect().left + 25}px`;
-  bullet.element = bulletCanvas;
-  bullet.collider = new Collider(bullet.element, true);
-  bullet.animationStart;
-  // window.requestAnimationFrame(animationFrame);
-  bullets.push(bullet);
-};
-
 function render() {
-  window.requestAnimationFrame(animationFrame)
+  window.requestAnimationFrame(animationFrame);
 }

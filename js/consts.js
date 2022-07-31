@@ -8,8 +8,6 @@ const gameState = {
   score: 0,
 };
 
-// const gameScreen = document.getElementById('gameScreen');
-
 const animationState = {
   reset: false,
   done: false,
