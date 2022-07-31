@@ -1,10 +1,13 @@
 'use strict';
 
-function GameScreen() {
-  this.element = document.getElementById('gameScreen');
-}
+const gameScreen = {
+  element: document.getElementById('gameScreen'),
+};
 
-const gameScreen = new GameScreen();
+const gameState = {
+  score: 0,
+};
+
 // const gameScreen = document.getElementById('gameScreen');
 
 const animationState = {
@@ -12,4 +15,8 @@ const animationState = {
   done: false,
   start: 0,
   previousTimestamp: 0,
-}
+};
+
+const constants = {
+  MAXBULLETS: 5,
+};

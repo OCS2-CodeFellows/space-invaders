@@ -25,15 +25,13 @@ header h1 {
   position: relative;
 }
 
-.spaceship-canvas {
+.player {
   position: absolute;
   bottom: 5px;
 }
 
-.invader-canvas {
+.invader {
   position: absolute;
-  bottom: 6px;
-  left: 200px;
 }
 
 /* .spaceship {

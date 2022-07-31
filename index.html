@@ -8,7 +8,8 @@
   <script src="js/Collider.js" defer></script>
   <script src="js/consts.js" defer></script>
   <script src="js/draw-ship.js" defer></script>
-  <script src="js/draw-invader.js" defer></script>
+  <script src="js/draw-bullet.js" defer></script>
+  <script src="js/Invader.js" defer></script>
   <script src="js/app.js" defer></script>
   <title>Space Invaders</title>
 </head>
@@ -19,10 +20,9 @@
   <main>
     <div class="game-screen" id="gameScreen">
       <div style="display: none;">
-        <img id="source" src="assets/red-invader.png" width="55" height="40" alt="">
+        <img id="invaderSource" src="assets/red-invader-5px.png" width="55" height="40" alt="">
+        <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
       </div>
-      <canvas class="spaceship-canvas" width="55" height="35"></canvas>
-      <canvas class="invader-canvas" width="55" height="40"></canvas>
     </div>
   </main>
   <footer>

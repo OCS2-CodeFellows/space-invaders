@@ -1,17 +1,18 @@
-'use strict'
+'use strict';
 
 
-const spaceship = {
-  element: document.querySelector('.spaceship-canvas'),
-  position: 0,
-};
+// const spaceship = {
+//   element: document.querySelector('.spaceship-canvas'),
+//   position: 0,
+// };
 
-spaceship.collider = new Collider(spaceship.element, true);
-
-const invader = new Invader()
+// spaceship.collider = new Collider(spaceship.element, true);
+const player = new PlayerShip();
+const invader = new Invader();
 
 
 const bullets = [];
+render();
 
 // Keydown
 window.addEventListener('keydown', (e) => {
@@ -19,12 +20,12 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'a') {
       // speed -= 0.1
       // window.requestAnimationFrame(moveLoop)
-      move(spaceship, 'left');
+      player.move('left');
     }
     if (e.key === 'd') {
       // speed -= 0.1
       // window.requestAnimationFrame(moveLoop)
-      move(spaceship, 'right');
+      player.move('right');
 
     }
   }
@@ -33,20 +34,21 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
   const gameScreenCollider = gameScreen.element.getBoundingClientRect();
   if (e.key === 'a') {
-    const shipCollider = spaceship.element.getBoundingClientRect();
-    spaceship.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
+    const shipCollider = player.element.getBoundingClientRect();
+    player.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
   }
   if (e.key === 'd') {
-    const shipCollider = spaceship.element.getBoundingClientRect();
-    spaceship.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
+    const shipCollider = player.element.getBoundingClientRect();
+    player.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
   }
 });
 
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
-    if (e.key === ' ' && bullets.length <= 3) {
+    if (e.key === ' ' && Bullet.instances.length < constants.MAXBULLETS) {
       console.log('pew');
-      const newBullet = createBullet();
+      const newBullet = new Bullet();
+      // createBullet()
     }
   }
 });
@@ -58,104 +60,91 @@ window.addEventListener('keydown', (e) => {
 // So we need to only stop it if the instance array of Bullets is empty. Not every time a collision happens!
 // We need to create a way to check if a bullet has collided with an enemy or the screen, then get THAT bullet out of the array.
 
-function removeBullet(bullet) {
-  for (let i = 0; i < bullets.length; i++) {
-    const checkBullet = bullets[i];
-    if (bullet.element === checkBullet.element) {
-      bullet.collider.removeInstance();
-      bullets[i].element.remove();
-      bullets.splice(i, 1);
+// function removeBullet(bullet) {
+//   for (let i = 0; i < bullets.length; i++) {
+//     const checkBullet = bullets[i];
+//     if (bullet.element === checkBullet.element) {
+//       bullet.collider.removeInstance();
+//       bullets[i].element.remove();
+//       bullets.splice(i, 1);
+//     }
+//   }
+// }
+// This function runs on every frame.
+function animationFrame(timestamp) {
+
+  animationState.done = false;
+  // console.log("TIMESTAMP", timestamp)
+  const screenRect = gameScreen.element.getBoundingClientRect();
+
+  // if (animationState.reset) {
+  //   animationState.start = timestamp;
+  // }
+
+  // Later this should loop over everything on the screen that needs to be animated/moved. Not just bullets
+  // It sets the start time of the object's animation so that we can compare it to a GLOBAL timestamp for elapsed time
+  for (let bullet of Bullet.instances) {
+    if (bullet.animationStart === undefined) {
+      bullet.animationStart = timestamp;
     }
   }
-}
-
-function bulletFrame(timestamp) {
-  animationState.done = false;
-  if (animationState.reset) {
-    animationState.start = timestamp;
-  }
-  animationState.reset = false;
-  // animationState.done = false;
-  if (animationState.start === undefined) {
-    animationState.start = timestamp;
-  }
-  const elapsed = timestamp - animationState.start;
+  // if (animationState.start === undefined) {
+  //   animationState.start = timestamp;
+  // }
+  
   // console.log("PREVIOUS", animationState.previousTimestamp)
   // console.log("CURRENT", timestamp)
+  // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
-    for (let bullet of bullets) {
-      let spaceFromBottom = parseInt(bullet.element.style.bottom.replace('px', ''));
-      bullet.element.style.bottom = `${spaceFromBottom += 5}px`;
+    player.updateCanvas();
+    // Move bullets and check if a player's bullet hits the top of the screen
+    for (let bullet of Bullet.instances) {
+      const elapsed = timestamp - bullet.animationStart;
+      const count = Math.min(40 + (.6 * elapsed), 1000); // Sets speed of bullets and ensures they only move 1000px;
       const bulletRect = bullet.element.getBoundingClientRect();
-      const screenRect = gameScreen.element.getBoundingClientRect();
-      if (bulletRect.top === screenRect.top) {
-        removeBullet(bullet);
+
+      // console.log(elapsed);
+      // console.log(count);
+      // console.log("COUNT", count);
+      bullet.element.style.bottom = `${count}px`;
+      if (bulletRect.top <= screenRect.top) {
+        bullet.removeBullet();
       }
     }
     const collision = Collider.checkCollisions();
     if (collision) {
-      for (let bullet of bullets) {
-        for (let collider of collision) {
-          if (collider.element === bullet.element) {
-            removeBullet(bullet);
-
+      for (let collider of collision) {
+        // Check if one of the colliders in a collision is a bullet
+        if (collider.element.classList.contains('bullet')){
+          for (let bullet of Bullet.instances) {
+            if (collider.element === bullet.element) {
+              bullet.removeBullet();
+            }
           }
         }
+        // TODO: Check if one of the colliders in a collision is an invader (INVADER BULLETS SHOULD PASS THROUGH OTHER INVADERS)
+
+        // TODO: Check if one of the colliders in a collision is the player
       }
 
     }
-    if (!bullets.length) animationState.done = true;
+    // if (!bullets.length) animationState.done = true;
   }
-
-  if (elapsed < 5000) {
-    animationState.previousTimestamp = timestamp;
-    if (!animationState.done) {
-      window.requestAnimationFrame(bulletFrame);
-    }
+  // if (elapsed < 1000)
+  animationState.previousTimestamp = timestamp;
+  if (!animationState.done) {
+    window.requestAnimationFrame(animationFrame);
   }
 }
 
-function move(target, direction) {
-  const velocity = 300;
-  const targetCollider = target.element.getBoundingClientRect();
-  const gameScreenCollider = gameScreen.element.getBoundingClientRect();
-  console.log('GAME SCREEN COLLIDER', gameScreenCollider);
-  console.log('SHIP COLLIDER', targetCollider);
 
-  let distance;
-  let seconds;
-  if (direction === 'left' && targetCollider.left > gameScreenCollider.left) {
-    distance = targetCollider.left - gameScreenCollider.left;
-    seconds = distance / velocity;
-    console.log('DISTANCE MOVED', distance);
-    console.log('SECONDS ANIMATED', seconds);
-    console.log('VELOCITY', (distance / seconds));
-    target.position = 0;
 
-  } else if (direction === 'right' && targetCollider.right < gameScreenCollider.right){
-    distance = gameScreenCollider.right - targetCollider.right;
-    seconds = distance / velocity;
-    console.log('DISTANCE MOVED', distance);
-    console.log('SECONDS ANIMATED', seconds);
-    console.log('VELOCITY', (distance / seconds));
+//TODO: Implement bullets as an object constructor
+// function Bullet() {
+//   this.element = document.createElement('canvas');
 
-    target.position = gameScreenCollider.width - targetCollider.width;
-
-  } else {
-    console.log('Boundary Reached');
-  }
-  target.element.style.transition = `transform ${seconds}s linear`;
-  target.element.style.transform = (`translateX(${target.position}px)`);
-  // reset = true
-  // window.requestAnimationFrame(frame)
-}
-
-function Bullet() {
-  this.element = document.createElement('canvas');
-
-}
+// }
 function createBullet() {
-  animationState.reset = true;
   const bullet = {
 
   };
@@ -168,22 +157,16 @@ function createBullet() {
   bulletCtx.fillRect(0, 0, 5, 10);
   gameScreen.element.append(bulletCanvas);
   bulletCanvas.style.position = 'absolute';
-  bulletCanvas.style.bottom = '45px';
+  bulletCanvas.style.bottom = '40px';
   // Redo this algorithm, or function it out.
-  bulletCanvas.style.left = `${spaceship.element.getBoundingClientRect().left - gameScreen.element.getBoundingClientRect().left + 25}px`;
+  bulletCanvas.style.left = `${player.element.getBoundingClientRect().left - gameScreen.element.getBoundingClientRect().left + 25}px`;
   bullet.element = bulletCanvas;
   bullet.collider = new Collider(bullet.element, true);
-  window.requestAnimationFrame(bulletFrame);
+  bullet.animationStart;
+  // window.requestAnimationFrame(animationFrame);
   bullets.push(bullet);
+};
+
+function render() {
+  window.requestAnimationFrame(animationFrame)
 }
-
-// function screenCollision(target) {
-//   targetCollider = target.element.getBoundingClientRect();
-// }
-
-// function objectsCollision(object, target) {
-//   objectCollider = object.element.getBoundingClientRect();
-//   targetCollider = target.element.getBoundingClientRect();
-// }
-
-console.log(Collider.checkCollisions());
