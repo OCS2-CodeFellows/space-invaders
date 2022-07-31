@@ -61,7 +61,7 @@ function animationFrame(timestamp) {
   // if (animationState.start === undefined) {
   //   animationState.start = timestamp;
   // }
-  
+
   // console.log("PREVIOUS", animationState.previousTimestamp)
   // console.log("CURRENT", timestamp)
   // This is our "main loop", where all the actual animation/check work should be done.
