@@ -1,4 +1,6 @@
 'use strict';
+/* exported constants, animationState, gameState, gameScreen */
+
 
 const gameScreen = {
   element: document.getElementById('gameScreen'),

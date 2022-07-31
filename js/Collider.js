@@ -3,19 +3,19 @@ function Collider(element, dynamic = true) {
   this.rect = element.getBoundingClientRect();
   this.dynamic = dynamic;
   Collider.instances.push(this);
-  
+
   // else {
   //   Collider.staticInstances.push(this);
   // }
 }
 Collider.prototype.deleteCollider = function() {
-  console.log("Remove Collider!")
+  console.log('Remove Collider!');
   for (let i = 0; i < Collider.instances.length; i++) {
     if (Collider.instances[i].element === this.element) {
       Collider.instances.splice(i, 1);
     }
   }
-}
+};
 // COLLIDER - A collider, in this case, is just a box drawn around an element. We use a function to detect if any of these boxes are touching each other.
 // STATIC - Static colliders are typically placed on non-moving objects, like the floor or walls.
 Collider.instances = [];

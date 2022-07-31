@@ -37,7 +37,7 @@ PlayerShip.prototype.move = function(direction) {
   // Use CSS transitions to move the ship. May update this to use a similar logic to the bullet animations.
   this.element.style.transition = `transform ${seconds}s linear`;
   this.element.style.transform = (`translateX(${this.position}px)`);
-}
+};
 
 function createPlayerCanvas(){
   const canvas = document.createElement('canvas');
