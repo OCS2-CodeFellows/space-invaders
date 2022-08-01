@@ -19,4 +19,8 @@ const animationState = {
 
 const constants = {
   MAXBULLETS: 5,
+  INVADER_HEIGHT: 40,
+  INVADER_WIDTH: 55,
+  PLAYER_HEIGHT: 35,
+  PLAYER_WIDTH: 55,
 };

@@ -14,10 +14,10 @@ Bullet.prototype.removeBullet = function() {
     if (this.element === checkBullet.element) {
       this.collider.deleteCollider();
       this.element.remove();
-      Bullet.instances.splice(i, 1)
+      Bullet.instances.splice(i, 1);
     }
   }
-}
+};
 
 function createBulletCanvas(ship){
   const canvas = document.createElement('canvas');
@@ -29,7 +29,7 @@ function createBulletCanvas(ship){
   canvas.style.left = `${getShipCenter(ship)}px`;
 
   const bulletCtx = canvas.getContext('2d');
-  bulletCtx.fillStyle = '#cccccc'; 
+  bulletCtx.fillStyle = '#cccccc';
   bulletCtx.fillRect(0, 0, 5, 10);
 
   gameScreen.element.append(canvas);
@@ -44,7 +44,7 @@ function getShipCenter(ship) {
   const screenLeftSide = gameScreen.element.getBoundingClientRect().left;
   const bulletSizeAdjustment = 2.5; // Bullets are 5px, so we'll adjust by 2.5px to better center the bullet.
   const shipSizeHalf = shipRect.width / 2;
-  
+
   const center = shipLeftSide - screenLeftSide + shipSizeHalf - bulletSizeAdjustment;
   return center;
 }

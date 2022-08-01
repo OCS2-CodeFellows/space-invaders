@@ -41,8 +41,8 @@ PlayerShip.prototype.move = function(direction) {
 
 function createPlayerCanvas(){
   const canvas = document.createElement('canvas');
-  canvas.width = 55;
-  canvas.height = 35;
+  canvas.width = constants.PLAYER_WIDTH;
+  canvas.height = constants.PLAYER_HEIGHT;
   canvas.classList.add('player');
 
   gameScreen.element.append(canvas);
@@ -50,7 +50,7 @@ function createPlayerCanvas(){
 }
 
 PlayerShip.prototype.updateCanvas = function(){
-  this.ctx.clearRect(0, 0, 55, 35);
+  this.ctx.clearRect(0, 0, constants.PLAYER_WIDTH, constants.PLAYER_HEIGHT);
   this.ctx.drawImage(this.sourceImg, 0, 0);
 };
 

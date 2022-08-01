@@ -1,7 +1,31 @@
 'use strict';
 
+const invaderBox = new InvaderBox();
 const player = new PlayerShip();
-const invader = new Invader();
+new Invader(0, 10, [0, 0]);
+new Invader(1, 10, [0, 1]);
+new Invader(2, 10, [0, 2]);
+// new Invader(0, 10, [0, 3]);
+// new Invader(1, 10, [0, 4]);
+// new Invader(0, 10, [0, 5]);
+// new Invader(3, 10, [1, 0]);
+// new Invader(4, 10, [1, 1]);
+// new Invader(3, 10, [1, 2]);
+// new Invader(4, 10, [1, 3]);
+// new Invader(3, 10, [1, 4]);
+// new Invader(4, 10, [1, 5]);
+// new Invader(5, 10, [2, 0]);
+// new Invader(6, 10, [2, 1]);
+// new Invader(5, 10, [2, 2]);
+// new Invader(6, 10, [2, 3]);
+// new Invader(5, 10, [2, 4]);
+// new Invader(6, 10, [2, 5]);
+
+
+
+invaderBox.layoutInvaders();
+
+
 
 // Start the animation loop
 render();
@@ -66,11 +90,21 @@ function animationFrame(timestamp) {
   // console.log("CURRENT", timestamp)
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
+
+    if (timestamp - animationState.previousTimestamp >= 500) {
+      animationState.previousTimestamp = timestamp;
+      for (let invader of Invader.instances) {
+        invader.nextSprite();
+      }
+    }
     player.updateCanvas();
+    for (let invader of Invader.instances) {
+      invader.updateCanvas();
+    }
     // Move bullets and check if a player's bullet hits the top of the screen
     for (let bullet of Bullet.instances) {
       const elapsed = timestamp - bullet.animationStart;
-      const count = Math.min(40 + (.6 * elapsed), 1000); // Sets speed of bullets and ensures they only move 1000px;
+      const count = Math.min(40 + (.5 * elapsed), 1000); // Sets speed of bullets and ensures they only move 1000px;
       const bulletRect = bullet.element.getBoundingClientRect();
 
       // console.log(elapsed);
@@ -101,7 +135,7 @@ function animationFrame(timestamp) {
     // if (!bullets.length) animationState.done = true;
   }
   // if (elapsed < 1000)
-  animationState.previousTimestamp = timestamp;
+  // animationState.previousTimestamp = timestamp;
   if (!animationState.done) {
     window.requestAnimationFrame(animationFrame);
   }
