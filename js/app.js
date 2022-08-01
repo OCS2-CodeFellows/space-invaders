@@ -33,28 +33,29 @@ render();
 // Keydown
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
-    if (e.key === 'a') {
+    if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.move('left');
     }
-    if (e.key === 'd') {
+    if (e.key === 'd' || e.key === 'ArrowRight') {
       player.move('right');
-
     }
   }
 });
 
+// On keyup, place ship in its current spot, stopping CSS transition.
 window.addEventListener('keyup', (e) => {
   const gameScreenCollider = gameScreen.element.getBoundingClientRect();
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'ArrowLeft') {
     const shipCollider = player.element.getBoundingClientRect();
     player.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'ArrowRight') {
     const shipCollider = player.element.getBoundingClientRect();
     player.element.style.transform = (`translateX(${shipCollider.x - gameScreenCollider.x}px)`);
   }
 });
 
+// Lets us shoot bullets.
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === ' ' && Bullet.instances.length < constants.MAXBULLETS) {
@@ -64,9 +65,15 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+
+
+
+
+
+
+
 // This function runs on every frame.
 function animationFrame(timestamp) {
-
   animationState.done = false;
   // console.log("TIMESTAMP", timestamp)
   const screenRect = gameScreen.element.getBoundingClientRect();
@@ -77,6 +84,7 @@ function animationFrame(timestamp) {
 
   // Later this should loop over everything on the screen that needs to be animated/moved. Not just bullets
   // It sets the start time of the object's animation so that we can compare it to a GLOBAL timestamp for elapsed time
+
   for (let bullet of Bullet.instances) {
     if (bullet.animationStart === undefined) {
       bullet.animationStart = timestamp;
@@ -115,6 +123,7 @@ function animationFrame(timestamp) {
         bullet.removeBullet();
       }
     }
+
     const collision = Collider.checkCollisions();
     if (collision) {
       for (let collider of collision) {
@@ -140,6 +149,13 @@ function animationFrame(timestamp) {
     window.requestAnimationFrame(animationFrame);
   }
 }
+
+
+
+
+
+
+
 
 function render() {
   window.requestAnimationFrame(animationFrame);

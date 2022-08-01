@@ -12,7 +12,7 @@ InvaderBox.prototype.layoutInvaders = function() {
     invader.element.style.top = `${70 * invader.position[0]}px`;
     invader.element.style.left = `${85 * invader.position[1]}px`;
   }
-}
+};
 
 function createInvaderBox() {
   const box = document.createElement('div');
