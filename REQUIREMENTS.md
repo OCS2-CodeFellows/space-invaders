@@ -25,9 +25,11 @@ The joy of escapism and fun, with the advantage of providing modern gamers with 
 - SOUND
 - Color themes
 
-
 ## Functional Requirements
 - The player will start on a home screen.
 - The player will be able to choose to play, view hi-scores, or navigate to an "About Us" page.
 - While playing, the player will be able to move the ship horizontally and shoot bullets towards the enemies.
 - While playing, the player will be able to watch their score update.
+
+## Data Flow
+The bulk of the action will happen inside of a "main loop", which is ran with help from the built-in Window.requestAnimationFrame() function. This loop will happen once every frame (At a typical target rate of 60FPS), and will call other functions that handle drawing objects to the screen and checking for collisions.
