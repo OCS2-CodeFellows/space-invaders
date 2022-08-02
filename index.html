@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main-screen-style.css">
   <script src="js/Collider.js" defer></script>
   <script src="js/consts.js" defer></script>
+  <script src="js/storage.js" defer></script>
   <script src="js/invader-box.js" defer></script>
   <script src="js/draw-ship.js" defer></script>
   <script src="js/draw-bullet.js" defer></script>
@@ -15,6 +20,7 @@
   <script src="js/app.js" defer></script>
   <title>Space Invaders</title>
 </head>
+
 <body>
   <header>
     <!-- <h1>Space Invaders</h1> -->
@@ -36,10 +42,19 @@
         <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
         <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
       </div>
+      <section id="inputScreen" class="input-screen hidden">
+        <form id="playerName" name="playerName">
+          <label>Enter Your Initials
+            <input type="text" name="inputName" id="inputName">
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
     </div>
   </main>
   <footer>
-    
+
   </footer>
 </body>
+
 </html>

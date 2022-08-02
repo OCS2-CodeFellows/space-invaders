@@ -7,6 +7,10 @@ body {
   color: #cccccc
 }
 
+body * {
+  font-family: 'Press Start 2P', cursive;
+}
+
 header,
 main,
 footer {
@@ -17,6 +21,19 @@ header h1 {
   font-size: 2rem;
 }
 
+.back-button {
+  background-color: #242424;
+  font-size: 2rem;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+a,
+a:visited {
+  color: #cccccc;
+  text-decoration: none;
+  background-color: #363636;
+}
 
 /* 
 .invader {
