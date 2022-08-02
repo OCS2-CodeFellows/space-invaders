@@ -26,10 +26,10 @@ new Invader(2, 10, [0, 2]);
 invaderBox.layoutInvaders();
 
 
+const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startScreen');
-
 // Start the animation loop
-startScreen.addEventListener('click', startGame);
+startButton.addEventListener('click', startGame);
 // render();
 
 // Keydown
