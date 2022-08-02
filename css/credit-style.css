@@ -39,6 +39,8 @@ main {
 .profile-text {
   grid-area: text;
 
+}
+
 ul {
   list-style-type: circle;
   list-style-position: inside;
