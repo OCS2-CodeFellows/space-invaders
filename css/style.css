@@ -30,6 +30,11 @@ header h1 {
   bottom: 5px;
 }
 
+.menu-option {
+  width: 300px;
+  height: 150px;
+}
+
 /* 
 .invader {
   position: absolute;

@@ -26,9 +26,11 @@ new Invader(2, 10, [0, 2]);
 invaderBox.layoutInvaders();
 
 
+const startButton = document.getElementById('startScreen');
 
 // Start the animation loop
-render();
+startScreen.addEventListener('click', startGame);
+// render();
 
 // Keydown
 window.addEventListener('keydown', (e) => {
@@ -148,6 +150,12 @@ function animationFrame(timestamp) {
   if (!animationState.done) {
     window.requestAnimationFrame(animationFrame);
   }
+}
+
+function startGame() {
+  startScreen.style.display = "none";
+  render();
+
 }
 
 
