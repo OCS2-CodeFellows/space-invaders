@@ -5,3 +5,5 @@
 - Robert Shepley
 - Timothee Odushina
 - Alan Chelko
+
+![Domain Modeling](domain-modeling.png)
