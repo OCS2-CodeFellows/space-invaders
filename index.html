@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/startScreen-style.css">
+  <link rel="stylesheet" href="css/main-screen-style.css">
   <script src="js/Collider.js" defer></script>
   <script src="js/consts.js" defer></script>
   <script src="js/invader-box.js" defer></script>
@@ -17,11 +17,17 @@
 </head>
 <body>
   <header>
-    <h1>Space Invaders</h1>
+    <!-- <h1>Space Invaders</h1> -->
   </header>
   <main>
     <div class="game-screen" id="gameScreen">
-      <section id="startScreen">
+      <section class="start-screen" id="startScreen">
+        <div class="start-invader-banner">
+          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
+          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
+          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
+        </div>
+        <h1>Space Invaders</h1>
         <button id="startButton" class="menu-option">Start Game</button>
         <button id="highScores" class="menu-option">Hi-Scores</button>
         <a href="credits.html" class="menu-option">credits</a>

@@ -22,12 +22,8 @@ new Invader(2, 10, [0, 2]);
 // new Invader(6, 10, [2, 5]);
 
 
-
-invaderBox.layoutInvaders();
-
-
 const startScreen = document.getElementById('startScreen');
-const startButton = document.getElementById('startScreen');
+const startButton = document.getElementById('startButton');
 // Start the animation loop
 startButton.addEventListener('click', startGame);
 // render();
@@ -153,17 +149,11 @@ function animationFrame(timestamp) {
 }
 
 function startGame() {
-  startScreen.style.display = "none";
+  startScreen.style.display = 'none';
+  invaderBox.layoutInvaders();
   render();
 
 }
-
-
-
-
-
-
-
 
 function render() {
   window.requestAnimationFrame(animationFrame);
