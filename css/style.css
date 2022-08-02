@@ -17,23 +17,6 @@ header h1 {
   font-size: 2rem;
 }
 
-.game-screen {
-  box-sizing: border-box;
-  width: 600px;
-  height: 800px;
-  background-color: #121212;
-  position: relative;
-}
-
-.player {
-  position: absolute;
-  bottom: 5px;
-}
-
-.menu-option {
-  width: 300px;
-  height: 150px;
-}
 
 /* 
 .invader {
