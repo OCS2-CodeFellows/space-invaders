@@ -13,6 +13,8 @@ const gameScreen = {
 
 const gameState = {
   score: 0,
+  invaderSpeed: 250,
+  invaderStepSize: 5,
 };
 
 const animationState = {

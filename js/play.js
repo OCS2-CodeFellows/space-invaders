@@ -2,12 +2,15 @@
 Score.loadScores();
 console.log(Score.instances)
 
-const invaderBox = new InvaderBox();
-invaderBox.stepInvaders()
+let invaderBox = new InvaderBox();
 const player = new PlayerShip();
 
 
 function spawnWave() {
+  invaderBox = new InvaderBox();
+  gameState.invaderSpeed -= 25;
+  gameState.invaderStepSize += 1;
+  console.log("INVADER SPEED:", gameState.invaderSpeed)
   for (let bullet of Bullet.instances) {
     bullet.removeBullet();
   }
@@ -113,7 +116,7 @@ function animationFrame(timestamp) {
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
 
-    if (timestamp - animationState.previousTimestamp >= 100) {
+    if (timestamp - animationState.previousTimestamp >= gameState.invaderSpeed) {
       animationState.previousTimestamp = timestamp;
       for (let invader of Invader.instances) {
         invader.nextSprite();

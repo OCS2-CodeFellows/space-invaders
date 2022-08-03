@@ -3,30 +3,31 @@ function InvaderBox() {
   this.element = createInvaderBox();
   this.rowCount = 4;
   this.columnCount = 5;
-  this.horizontalSteps = 0;
+  this.horizontalSteps = 2;
   this.verticalSteps = 0;
-  this.stepSize = 5;
   this.stepDirection = constants.RIGHT;
 }
 
 
 
 InvaderBox.prototype.layoutInvaders = function() {
+  this.element.style.left = `${gameState.invaderStepSize * 2}px`
   for (let i = 0; i < Invader.instances.length; i++) {
     const invader = Invader.instances[i];
     invader.element.style.top = `${52 * invader.position[0]}px`;
     invader.element.style.left = `${68 * invader.position[1]}px`;
   }
+
 };
 
 InvaderBox.prototype.stepInvaders = function() {
   const gameScreenBound = gameScreen.element.getBoundingClientRect();
   const boxBound = this.element.getBoundingClientRect();
-  if (((boxBound.left - this.stepSize) - (gameScreenBound.left)) <= 0) {
+  if (((boxBound.left - gameState.invaderStepSize) - (gameScreenBound.left)) <= 0) {
     this.stepDirection = constants.RIGHT;
     this.verticalSteps++;
   } 
-  if ((gameScreenBound.right) - (boxBound.right + this.stepSize) <= 0) {
+  if ((gameScreenBound.right) - (boxBound.right + gameState.invaderStepSize) <= 0) {
     this.stepDirection = constants.LEFT;
     this.verticalSteps++;
   }
@@ -37,8 +38,8 @@ InvaderBox.prototype.stepInvaders = function() {
     this.horizontalSteps--;
   }
 
-  this.element.style.left = `${this.horizontalSteps * this.stepSize}px`
-  this.element.style.top = `${52 + this.verticalSteps * this.stepSize}px`
+  this.element.style.left = `${this.horizontalSteps * gameState.invaderStepSize}px`
+  this.element.style.top = `${52 + this.verticalSteps * (gameState.invaderStepSize * 2)}px`
   // console.log(this.horizontalSteps)
 }
 
