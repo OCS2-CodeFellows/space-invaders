@@ -12,7 +12,7 @@ main {
   margin: 1rem;
   display: grid;
   grid-template-rows: 50px 205px 48px;
-  grid-template-columns: 50px 50px 175px 350px;
+  grid-template-columns: 58px 50px 175px 350px;
   grid-template-areas:
     "pic pic pic name"
     "pic pic pic text"
@@ -27,6 +27,8 @@ main {
 
 .profile-picture {
   grid-area: pic;
+  border-radius: 8px;
+  opacity: 90%;
 }
 
 .linkedin-logo {
@@ -35,6 +37,7 @@ main {
 
 .github-logo {
   grid-area: gh;
+  margin-right: 8px;
 }
 
 .profile-text {
@@ -58,4 +61,15 @@ ul {
 
 li {
   margin-bottom: 1em;
+}
+
+.icon {
+  background-color: #aaaaaa;
+  border-radius: 4px;
+  opacity: 90%;
+}
+
+.icon:hover {
+  background-color: #cccccc;
+  opacity: 100%;
 }
