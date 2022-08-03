@@ -1,8 +1,5 @@
 # final-project
 
-
-![Domain Modeling](docs/domain-modeling.png)
-
 ## Notes
 
 ## Contributors
@@ -11,6 +8,9 @@
 - Robert Shepley
 - Timothee Odushina
 - Alan Chelko
+
+
+## Domain Model, Object Constructors
 
 ```mermaid
 classDiagram
