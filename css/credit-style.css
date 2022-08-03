@@ -41,7 +41,8 @@ main {
 
 }
 
-.profile-text {
+.profile-text,
+.profile-text * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
