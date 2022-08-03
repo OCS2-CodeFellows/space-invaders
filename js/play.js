@@ -1,6 +1,6 @@
 'use strict';
 Score.loadScores();
-console.log(Score.instances)
+updateBannerScores();
 
 let invaderBox = new InvaderBox();
 const player = new PlayerShip();
@@ -8,12 +8,16 @@ const player = new PlayerShip();
 
 function spawnWave() {
   invaderBox = new InvaderBox();
-  gameState.invaderSpeed -= 25;
-  gameState.invaderStepSize += 1;
+  gameState.invaderSpeed *= .95;
+  gameState.invaderStepSize *= 1.1;
   console.log("INVADER SPEED:", gameState.invaderSpeed)
+  console.log("INVADER STEP SIZE:", gameState.invaderStepSize)
+
+  // Remove old bullets when spawning in a new wave.
   for (let bullet of Bullet.instances) {
     bullet.removeBullet();
   }
+
   new Invader(0, 10, [0, 0]);
   new Invader(0, 10, [0, 1]);
   new Invader(0, 10, [0, 2]);
@@ -116,6 +120,7 @@ function animationFrame(timestamp) {
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
 
+    // Executes the code block once every (gameState.invaderSpeed)ms
     if (timestamp - animationState.previousTimestamp >= gameState.invaderSpeed) {
       animationState.previousTimestamp = timestamp;
       for (let invader of Invader.instances) {
@@ -164,7 +169,6 @@ function animationFrame(timestamp) {
             }
           }
         }
-        // TODO: Check if one of the colliders in a collision is an invader (INVADER BULLETS SHOULD PASS THROUGH OTHER INVADERS)
 
         // TODO: Check if one of the colliders in a collision is the player
       }
@@ -192,7 +196,6 @@ function render() {
 
 
 const initialsForm = document.forms.initialsForm;
-const initialsInput = document.forms.initialsForm.inputInitials;
 
 function submitScore(event) {
   let playerInitials = '';
@@ -207,9 +210,9 @@ function submitScore(event) {
 initialsForm.addEventListener('submit', submitScore)
 initialsForm.addEventListener('input', (e) => {
   if (e.target.nextElementSibling) {
-    e.target.nextElementSibling.focus()
+    e.target.nextElementSibling.focus();
   } else {
-    initialsForm.submitButton.focus()
+    initialsForm.submitButton.focus();
   }
 })
 // initialsInput.addEventListener('input', (e) => {
