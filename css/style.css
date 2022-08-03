@@ -7,7 +7,7 @@ body {
   color: #cccccc
 }
 
-body * {
+body>* {
   font-family: 'Press Start 2P', cursive;
 }
 

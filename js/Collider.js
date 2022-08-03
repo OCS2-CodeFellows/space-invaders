@@ -9,7 +9,6 @@ function Collider(element, dynamic = true) {
   // }
 }
 Collider.prototype.deleteCollider = function() {
-  console.log('Remove Collider!');
   for (let i = 0; i < Collider.instances.length; i++) {
     if (Collider.instances[i].element === this.element) {
       Collider.instances.splice(i, 1);
