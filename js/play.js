@@ -9,7 +9,7 @@ const player = new PlayerShip();
 function spawnWave() {
   invaderBox = new InvaderBox();
   gameState.invaderSpeed *= .95;
-  gameState.invaderStepSize *= 1.1;
+  gameState.invaderStepSize *= 1.05;
   console.log("INVADER SPEED:", gameState.invaderSpeed)
   console.log("INVADER STEP SIZE:", gameState.invaderStepSize)
 
@@ -148,36 +148,58 @@ function animationFrame(timestamp) {
 
     const collision = Collider.checkCollisions();
     if (collision) {
-      for (let collider of collision) {
-        // Check if one of the colliders in a collision is a bullet
-        if (collider.element.classList.contains('bullet')) {
-          for (let bullet of Bullet.instances) {
-            if (collider.element === bullet.element) {
-              bullet.removeBullet();
-            }
+      const c1 = collision[0];
+      const c2 = collision[1];
+      if (c1.element.classList.contains('bullet') && c2.element.classList.contains('invader') ||
+      c2.element.classList.contains('bullet') && c1.element.classList.contains('invader')) {
+        for (let bullet of Bullet.instances) {
+          if (c1.element === bullet.element || c2.element === bullet.element) {
+            bullet.removeBullet();
           }
         }
-        if (collider.element.classList.contains('invader')) {
-          for (let invader of Invader.instances) {
-            if (collider.element === invader.element) {
-              incrementScore(invader);
-              invader.removeInvader();
-            }
+        for (let invader of Invader.instances) {
+          if (c1.element === invader.element || c2.element === invader.element) {
+            incrementScore(invader);
+            invader.removeInvader();
           }
         }
-
-        // TODO: Check if one of the colliders in a collision is the player
       }
-
+      if (c1.element.classList.contains('player') || c2.element.classList.contains('player')) {
+        console.log('player!')
+      }
     }
-    // if (!bullets.length) animationState.done = true;
-  }
-  // if (elapsed < 1000)
-  // animationState.previousTimestamp = timestamp;
-  if (!animationState.done) {
-    window.requestAnimationFrame(animationFrame);
+    if (!animationState.done) {
+      window.requestAnimationFrame(animationFrame);
+    }
   }
 }
+
+// for (let collider of collision) {
+//   // Check if one of the colliders in a collision is a bullet
+//   if (collider.element.classList.contains('bullet')) {
+//     for (let bullet of Bullet.instances) {
+//       if (collider.element === bullet.element) {
+//         bullet.removeBullet();
+//       }
+//     }
+//   }
+//   if (collider.element.classList.contains('invader')) {
+//     for (let invader of Invader.instances) {
+//       if (collider.element === invader.element) {
+//         incrementScore(invader);
+//         invader.removeInvader();
+//       }
+//     }
+//   }
+
+// TODO: Check if one of the colliders in a collision is the player
+
+
+// if (!bullets.length) animationState.done = true;
+
+// if (elapsed < 1000)
+// animationState.previousTimestamp = timestamp;
+
 
 function endGame() {
   animationState.done = true;
