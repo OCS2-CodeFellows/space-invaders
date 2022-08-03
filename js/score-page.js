@@ -10,13 +10,17 @@ function renderScores() {
   scoreSection.innerHTML = '';
   for (let i = 0; i < Score.instances.length; i++){
     const container = document.createElement('div');
-    const playerName = document.createElement('span');
-    playerName.classList.add('score-name');
-    const playerScore = document.createElement('span');
-    playerScore.classList.add('score-value');
-    playerName.innerText = `${Score.instances[i].name}`.padStart(3, '__');
-    playerScore.innerText = `${Score.instances[i].score}`.padStart(6, '0');
-    container.append(playerName, playerScore);
+    container.classList.add('score-entry')
+    const position = document.createElement('span');
+    position.classList.add('score-position');
+    const initials = document.createElement('span');
+    initials.classList.add('score-name');
+    const score = document.createElement('span');
+    score.classList.add('score-value');
+    position.innerText = '#' + `${i + 1}`.padStart(2, '0')
+    initials.innerText = `${Score.instances[i].name}`.padStart(3, '__');
+    score.innerText = `${Score.instances[i].score}`.padStart(6, '0');
+    container.append(position, initials, score);
     scoreSection.append(container);
   }
 }
