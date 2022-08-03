@@ -34,6 +34,11 @@ PlayerShip.prototype.move = function(direction) {
   this.element.style.transform = (`translateX(${this.position}px)`);
 };
 
+PlayerShip.prototype.updateCanvas = function(){
+  this.ctx.clearRect(0, 0, 44, 40);
+  this.ctx.drawImage(this.sourceImg, 0, 0, 44, 40, 0, 0, 44, 40);
+};
+
 function createPlayerCanvas(){
   const canvas = document.createElement('canvas');
   canvas.width = 44;
@@ -44,10 +49,6 @@ function createPlayerCanvas(){
   return canvas;
 }
 
-PlayerShip.prototype.updateCanvas = function(){
-  this.ctx.clearRect(0, 0, 44, 40);
-  this.ctx.drawImage(this.sourceImg, 0, 0, 44, 40, 0, 0, 44, 40);
-};
 
 
 
