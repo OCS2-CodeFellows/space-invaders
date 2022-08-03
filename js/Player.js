@@ -10,8 +10,6 @@ PlayerShip.prototype.move = function(direction) {
   const velocity = 300; // pixels / second
   const playerRect = this.element.getBoundingClientRect();
   const gameScreenCollider = gameScreen.element.getBoundingClientRect();
-  console.log('GAME SCREEN COLLIDER', gameScreenCollider);
-  console.log('SHIP COLLIDER', playerRect);
 
   let distance;
   let seconds;
@@ -31,28 +29,26 @@ PlayerShip.prototype.move = function(direction) {
   } else {
     console.log('Boundary Reached');
   }
-  console.log('DISTANCE MOVED', distance);
-  console.log('SECONDS ANIMATED', seconds);
-  console.log('VELOCITY', (distance / seconds));
   // Use CSS transitions to move the ship. May update this to use a similar logic to the bullet animations.
   this.element.style.transition = `transform ${seconds}s linear`;
   this.element.style.transform = (`translateX(${this.position}px)`);
 };
 
+PlayerShip.prototype.updateCanvas = function(){
+  this.ctx.clearRect(0, 0, 44, 40);
+  this.ctx.drawImage(this.sourceImg, 0, 0, 44, 40, 0, 0, 44, 40);
+};
+
 function createPlayerCanvas(){
   const canvas = document.createElement('canvas');
   canvas.width = 44;
-  canvas.height = 28;
+  canvas.height = 40;
   canvas.classList.add('player');
 
   gameScreen.element.append(canvas);
   return canvas;
 }
 
-PlayerShip.prototype.updateCanvas = function(){
-  this.ctx.clearRect(0, 0, 44, 28);
-  this.ctx.drawImage(this.sourceImg, 0, 0, 55, 35, 0, 0, 44, 28);
-};
 
 
 

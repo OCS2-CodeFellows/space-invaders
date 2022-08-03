@@ -2,11 +2,13 @@
 
 function Bullet() {
   this.element = createBulletCanvas(player);
-  this.collider = new Collider(this.element, true);
+  this.collider = new Collider(this.element);
   this.animationStart;
 
   Bullet.instances.push(this);
 }
+
+Bullet.instances = [];
 
 Bullet.prototype.removeBullet = function() {
   for (let i = 0; i < Bullet.instances.length; i++) {
@@ -36,7 +38,6 @@ function createBulletCanvas(ship){
   return canvas;
 }
 
-Bullet.instances = [];
 
 function getShipCenter(ship) {
   const shipRect = ship.element.getBoundingClientRect();
