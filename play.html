@@ -22,9 +22,6 @@
 </head>
 
 <body>
-  <header>
-    <!-- <h1>Space Invaders</h1> -->
-  </header>
   <main>
     <div class="game-screen" id="gameScreen">
       <section class="score-banner" id="scoreBanner">
@@ -39,7 +36,7 @@
       </section>
       <div style="display: none;">
         <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
-        <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
+        <img id="playerSource" src="assets/new-ship-4px.png" width="55" height="35" alt="">
       </div>
       <section id="gameOverScreen" class="game-over-screen hidden">
         <h2>GAME OVER</h2>
@@ -51,13 +48,23 @@
               <input type="text" name="initialThree" id="initialThree" class="input-initial" maxlength="1">
             </div>
           </label>
-          <button type="submit" id="submitButton">Submit</button>
+          <button type="submit" id="submitButton" class="button">Submit</button>
         </form>
       </section>
     </div>
   </main>
   <footer>
-
+    <section class="instructions">
+      <h2>Controls</h2>
+      <ul>
+        <li><kbd>A</kbd> / <kbd><</kbd> - Move Left</li>
+        <li><kbd>D</kbd> / <kbd>></kbd> - Move Right</li>
+        <li><kbd>Space</kbd> - Shoot</li>
+        <li><kbd>ESC</kbd> - End game</li>
+      </ul>
+      <p>Shoot the invaders to earn points!</p>
+      <p>If the invaders reach the bottom, the game ends.</p>
+    </section>
   </footer>
 </body>
 

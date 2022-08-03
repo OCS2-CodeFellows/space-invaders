@@ -21,42 +21,49 @@ header h1 {
   font-size: 2rem;
 }
 
-.back-button {
-  background-color: #242424;
-  font-size: 2rem;
-  padding: 1rem;
-  text-decoration: none;
-}
-
 a,
 a:visited {
   color: #cccccc;
   text-decoration: none;
-  background-color: #363636;
+  background-color: transparent;
 }
+
+.button {
+  cursor: pointer;
+  color: #cccccc;
+  border: none;
+  background-color: #121212;
+  font-size: 1.5rem;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #181818;
+}
+
 
 .score-container {
   user-select: none;
 }
 
-/* 
-.invader {
-  position: absolute;
-} */
+kbd {
+  border-radius: 3px;
+  padding: 1px 2px 0;
+  border: 1px solid #cccccc;
+}
 
-/* .spaceship {
-  width: 6%;
-  position: absolute;
-  bottom: 1%; */
-/* transition-property: transform; */
-/* transition-duration: 2s; */
-/* } */
+.instructions {
+  margin: 15px 0px;
+  border: 1px solid #181818;
+  font-size: .8rem;
+  width: max-content;
+}
 
-/* .spaceship-canvas {
-  height: 100px;
-  width: 100px;
-} */
+.instructions>* {
+  margin: 15px 10px;
+}
 
-footer {
-  margin-top: auto;
+.instructions li {
+  margin: 10px 0px;
 }

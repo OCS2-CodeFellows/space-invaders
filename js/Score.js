@@ -6,7 +6,7 @@ function Score(initials, score) {
   if (Score.instances.length < 10) {
     Score.instances.push(this);
   } else if (score > Score.instances.at(-1).score) {
-    new Score(initials, score)
+    new Score(initials, score);
     Score.instances.pop();
   }
   sortScores();
@@ -32,20 +32,10 @@ Score.saveScores = function() {
   localStorage.setItem('scores', JSON.stringify(Score.instances));
 };
 
-Score.addScore = function(initials, value) {
-  if (Score.instances.length < 10) {
-    new Score(initials, value);
-  } else if (value > Score.instances.at(-1).score) {
-
-    new Score(initials, value);
-    Score.instances.pop();
-  }
-};
-
 Score.clearScores = function() {
   Score.instances = [];
   Score.saveScores();
-}
+};
 
 function sortScores() {
   Score.instances.sort((a, b) => {
@@ -66,6 +56,7 @@ function defaultScores() {
   new Score('DJS', 10);
 }
 
+// eslint-disable-next-line no-unused-vars
 function incrementScore(invader) {
   gameState.score += invader.pointsValue;
   updateBannerScores();
@@ -79,5 +70,3 @@ function updateBannerScores() {
   }
   currentScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
 }
-
-// console.log(Score.instances);

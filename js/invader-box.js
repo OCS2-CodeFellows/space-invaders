@@ -6,7 +6,10 @@ function InvaderBox() {
   this.horizontalSteps = 2;
   this.verticalSteps = 0;
   this.stepDirection = constants.RIGHT;
+  InvaderBox.instances.push(this)
 }
+
+InvaderBox.instances = [];
 
 
 
@@ -26,7 +29,7 @@ InvaderBox.prototype.stepInvaders = function() {
   if (((boxBound.left - gameState.invaderStepSize) - (gameScreenBound.left)) <= 0) {
     this.stepDirection = constants.RIGHT;
     this.verticalSteps++;
-  } 
+  }
   if ((gameScreenBound.right) - (boxBound.right + gameState.invaderStepSize) <= 0) {
     this.stepDirection = constants.LEFT;
     this.verticalSteps++;
@@ -41,7 +44,18 @@ InvaderBox.prototype.stepInvaders = function() {
   this.element.style.left = `${this.horizontalSteps * gameState.invaderStepSize}px`
   this.element.style.top = `${52 + this.verticalSteps * (gameState.invaderStepSize * 2)}px`
   // console.log(this.horizontalSteps)
-}
+};
+
+InvaderBox.prototype.removeInvaderBox = function() {
+  console.log('REMOVE BOX')
+  for (let i = 0; i < InvaderBox.instances.length; i++) {
+    const checkBox = InvaderBox.instances[i];
+    if (this.element === checkBox.element) {
+      this.element.remove();
+      InvaderBox.instances.splice(i, 1);
+    }
+  }
+};
 
 function createInvaderBox() {
   const box = document.createElement('div');
@@ -53,4 +67,3 @@ function createInvaderBox() {
   gameScreen.element.append(box);
   return box;
 }
-

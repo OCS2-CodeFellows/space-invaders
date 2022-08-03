@@ -17,9 +17,6 @@
 </head>
 
 <body>
-  <header>
-    <!-- <h1>Space Invaders</h1> -->
-  </header>
   <main>
     <div class="game-screen" id="gameScreen">
       <section class="score-banner" id="scoreBanner">
@@ -34,19 +31,31 @@
       </section>
       <section class="start-screen" id="startScreen">
         <div class="start-invader-banner">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
+          <img src="assets/invader-red_5px.png" alt="" class="banner-invader">
+          <img src="assets/invader-green_5px.png" alt="" class="banner-invader">
+          <img src="assets/invader-blue_5px.png" alt="" class="banner-invader">
         </div>
         <h1>Space Invaders</h1>
-        <a href="play.html" id="startButton" class="menu-option">Start Game</a>
-        <a href="hi-scores.html" id="highScores" class="menu-option">Hi-Scores</a>
-        <a href="credits.html" class="menu-option">Credits</a>
+        <ul class="menu-options">
+          <li><a href="play.html" id="startButton" class="menu-option">Start Game</a></li>
+          <li><a href="hi-scores.html" id="highScores" class="menu-option">Hi-Scores</a></li>
+          <li><a href="credits.html" class="menu-option">Credits</a></li>
+        </ul>
       </section>
-      
+    </div>
   </main>
   <footer>
-
+    <section class="instructions">
+      <h2>Controls</h2>
+      <ul>
+        <li><kbd>A</kbd> / <kbd><</kbd> - Move Left</li>
+        <li><kbd>D</kbd> / <kbd>></kbd> - Move Right</li>
+        <li><kbd>Space</kbd> - Shoot</li>
+        <li><kbd>ESC</kbd> - End game</li>
+      </ul>
+      <p>Shoot the invaders to earn points!</p>
+      <p>If the invaders reach the bottom, the game ends.</p>
+    </section>
   </footer>
 </body>
 
