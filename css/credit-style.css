@@ -5,14 +5,14 @@ main {
   align-items: center;
   justify-items: center;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
 }
 
 .profile-card {
   margin: 1rem;
   display: grid;
   grid-template-rows: 50px 205px 48px;
-  grid-template-columns: 50px 50px 175px 300px;
+  grid-template-columns: 50px 50px 175px 350px;
   grid-template-areas:
     "pic pic pic name"
     "pic pic pic text"
@@ -20,8 +20,9 @@ main {
 }
 
 .profile-card h2 {
+  font-family: 'Roboto', sans-serif;
   grid-area: name;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }
 
 .profile-picture {
@@ -43,12 +44,18 @@ main {
 
 .profile-text,
 .profile-text * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.3em;
 }
 
 ul {
   list-style-type: circle;
-  list-style-position: inside;
+  list-style-position: outside;
+  margin-left: 1em;
   margin-top: 10px;
   margin-bottom: 30px;
+}
+
+li {
+  margin-bottom: 1em;
 }
