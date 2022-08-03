@@ -6,7 +6,7 @@ function Score(initials, score) {
   if (Score.instances.length < 10) {
     Score.instances.push(this);
   } else if (score > Score.instances.at(-1).score) {
-    new Score(initials, score)
+    new Score(initials, score);
     Score.instances.pop();
   }
   sortScores();
@@ -30,16 +30,6 @@ Score.loadScores = function() {
 
 Score.saveScores = function() {
   localStorage.setItem('scores', JSON.stringify(Score.instances));
-};
-
-Score.addScore = function(initials, value) {
-  if (Score.instances.length < 10) {
-    new Score(initials, value);
-  } else if (value > Score.instances.at(-1).score) {
-
-    new Score(initials, value);
-    Score.instances.pop();
-  }
 };
 
 Score.clearScores = function() {
