@@ -76,7 +76,6 @@ window.addEventListener('keyup', (e) => {
 window.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     if (e.key === ' ' && Bullet.instances.length < constants.MAXBULLETS) {
-      console.log('pew');
       new Bullet();
     }
   }
@@ -93,7 +92,6 @@ window.addEventListener('keydown', (e) => {
 function animationFrame(timestamp) {
   if (Invader.instances.length <= 0) {
     spawnWave();
-    console.log("WAVE")
   }
   animationState.done = false;
   // console.log("TIMESTAMP", timestamp)
@@ -162,8 +160,6 @@ function animationFrame(timestamp) {
         if (collider.element.classList.contains('invader')) {
           for (let invader of Invader.instances) {
             if (collider.element === invader.element) {
-              console.log('collider', collider.element);
-              console.log('invader', invader.element);
               incrementScore(invader);
               invader.removeInvader();
             }
