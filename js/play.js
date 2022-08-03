@@ -3,22 +3,36 @@ Score.loadScores();
 console.log(Score.instances)
 
 const invaderBox = new InvaderBox();
+invaderBox.stepInvaders()
 const player = new PlayerShip();
-new Invader(0, 10, [0, 0]);
-new Invader(1, 10, [0, 1]);
-new Invader(2, 10, [0, 2]);
-new Invader(0, 10, [0, 3]);
-new Invader(1, 10, [0, 4]);
-new Invader(3, 10, [1, 0]);
-new Invader(4, 10, [1, 1]);
-new Invader(3, 10, [1, 2]);
-new Invader(4, 10, [1, 3]);
-new Invader(3, 10, [1, 4]);
-new Invader(5, 10, [2, 0]);
-new Invader(6, 10, [2, 1]);
-new Invader(5, 10, [2, 2]);
-new Invader(6, 10, [2, 3]);
-new Invader(5, 10, [2, 4]);
+
+
+function spawnWave() {
+  for (let bullet of Bullet.instances) {
+    bullet.removeBullet();
+  }
+  new Invader(0, 10, [0, 0]);
+  new Invader(0, 10, [0, 1]);
+  new Invader(0, 10, [0, 2]);
+  new Invader(0, 10, [0, 3]);
+  new Invader(0, 10, [0, 4]);
+  new Invader(4, 10, [1, 0]);
+  new Invader(4, 10, [1, 1]);
+  new Invader(4, 10, [1, 2]);
+  new Invader(4, 10, [1, 3]);
+  new Invader(4, 10, [1, 4]);
+  new Invader(6, 10, [2, 0]);
+  new Invader(6, 10, [2, 1]);
+  new Invader(6, 10, [2, 2]);
+  new Invader(6, 10, [2, 3]);
+  new Invader(6, 10, [2, 4]);
+  new Invader(2, 10, [3, 0]);
+  new Invader(2, 10, [3, 1]);
+  new Invader(2, 10, [3, 2]);
+  new Invader(2, 10, [3, 3]);
+  new Invader(2, 10, [3, 4]);
+  invaderBox.layoutInvaders();
+}
 
 // Start the animation loop
 // render();
@@ -70,6 +84,10 @@ window.addEventListener('keydown', (e) => {
 
 // This function runs on every frame.
 function animationFrame(timestamp) {
+  if (Invader.instances.length <= 0) {
+    spawnWave();
+    console.log("WAVE")
+  }
   animationState.done = false;
   // console.log("TIMESTAMP", timestamp)
   const screenRect = gameScreen.element.getBoundingClientRect();
@@ -95,11 +113,13 @@ function animationFrame(timestamp) {
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
 
-    if (timestamp - animationState.previousTimestamp >= 500) {
+    if (timestamp - animationState.previousTimestamp >= 100) {
       animationState.previousTimestamp = timestamp;
       for (let invader of Invader.instances) {
         invader.nextSprite();
       }
+      invaderBox.stepInvaders();
+      // console.log(invaderBox.horizontalSteps)
     }
     player.updateCanvas();
     for (let invader of Invader.instances) {
@@ -192,5 +212,4 @@ initialsForm.addEventListener('input', (e) => {
 // initialsInput.addEventListener('input', (e) => {
 // console.log(e)
 // })
-invaderBox.layoutInvaders();
 render();
