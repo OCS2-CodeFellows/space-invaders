@@ -79,7 +79,7 @@
 
 .game-screen {
   box-sizing: border-box;
-  width: 450px;
+  width: 800px;
   height: 600px;
   background-color: #121212;
   position: relative;
