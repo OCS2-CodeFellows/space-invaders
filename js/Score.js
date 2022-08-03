@@ -35,7 +35,7 @@ Score.saveScores = function() {
 Score.clearScores = function() {
   Score.instances = [];
   Score.saveScores();
-}
+};
 
 function sortScores() {
   Score.instances.sort((a, b) => {
@@ -56,6 +56,7 @@ function defaultScores() {
   new Score('DJS', 10);
 }
 
+// eslint-disable-next-line no-unused-vars
 function incrementScore(invader) {
   gameState.score += invader.pointsValue;
   updateBannerScores();
