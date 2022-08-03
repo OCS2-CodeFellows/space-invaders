@@ -1,5 +1,5 @@
 .start-screen,
-.input-screen {
+.game-over-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,14 +9,12 @@
   width: 100%;
 }
 
-.input-screen form,
-.input-screen label {
+.game-over-screen form,
+.game-over-screen label {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .start-screen * {}

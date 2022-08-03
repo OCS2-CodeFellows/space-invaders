@@ -6,4 +6,4 @@
 - Timothee Odushina
 - Alan Chelko
 
-![Domain Modeling](domain-modeling.png)
+![Domain Modeling](docs/domain-modeling.png)

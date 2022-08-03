@@ -1,5 +1,6 @@
 'use strict';
 Score.loadScores();
+console.log(Score.instances)
 
 const invaderBox = new InvaderBox();
 const player = new PlayerShip();
@@ -25,11 +26,10 @@ new Invader(6, 10, [2, 5]);
 
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
-const inputScreen = document.getElementById('inputScreen');
+const gameOverScreen = document.getElementById('gameOverScreen');
 const currentScoreBanner = document.getElementById('currentScoreDisplay');
 const hiScoreBanner = document.getElementById('hiScoreDisplay');
 const nameForm = document.forms.playerName;
-const submitLink = document.getElementById('submitName')
 // Start the animation loop
 // render();
 
@@ -168,11 +168,12 @@ function animationFrame(timestamp) {
 
 function endGame() {
   animationState.done = true;
-  inputScreen.classList.remove('hidden');
+  gameOverScreen.classList.remove('hidden');
 }
 
 function submitName(event) {
-  Score.addScore('test', 500000)
+  const initials = event.target.inputInitials.value;
+  Score.addScore(initials, gameState.score)
   Score.saveScores();
 
 }
@@ -196,6 +197,7 @@ function updateGameScreenScores() {
   }
   currentScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
 }
-submitLink.addEventListener('click', submitName)
+
+nameForm.addEventListener('submit', submitName)
 invaderBox.layoutInvaders();
 render();

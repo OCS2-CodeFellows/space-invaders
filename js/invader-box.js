@@ -8,7 +8,6 @@ function InvaderBox() {
 InvaderBox.prototype.layoutInvaders = function() {
   for (let i = 0; i < Invader.instances.length; i++) {
     const invader = Invader.instances[i];
-    console.log(invader);
     invader.element.style.top = `${70 * invader.position[0]}px`;
     invader.element.style.left = `${85 * invader.position[1]}px`;
   }

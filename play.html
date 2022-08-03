@@ -41,13 +41,13 @@
         <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
         <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
       </div>
-      <section id="inputScreen" class="input-screen hidden">
-        <form id="playerName" name="playerName">
+      <section id="gameOverScreen" class="game-over-screen hidden">
+        <h2>GAME OVER</h2>
+        <form action="index.html" id="playerName" name="playerName">
           <label>Enter Your Initials
-            <input type="text" name="inputName" id="inputName" maxlength="3">
+            <input type="text" name="inputInitials" id="inputInitials" class="input-initials" maxlength="3">
           </label>
-          <a href="index.html" id="submitName">Submit
-          </a>
+          <button type="submit" id="submitButton">Submit</button>
         </form>
       </section>
     </div>
