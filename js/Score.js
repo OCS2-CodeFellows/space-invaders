@@ -15,14 +15,12 @@ function Score(initials, score) {
 Score.instances = [];
 
 
-// TODO: Delete possible old scores from Score.instances.
-// TODO: For each score in storage, create a new Score instance/object
-Score.loadScores = function () {
-  let parsedStorage = JSON.parse(localStorage.getItem('scores'))
+Score.loadScores = function() {
+  let parsedStorage = JSON.parse(localStorage.getItem('scores')) || [];
   if (!parsedStorage.length){
     defaultScores();
     Score.saveScores();
-    parsedStorage = JSON.parse(localStorage.getItem('scores'))
+    parsedStorage = JSON.parse(localStorage.getItem('scores'));
   }
   Score.instances = [];
   for (let i = 0; i < parsedStorage.length; i++) {
@@ -30,7 +28,7 @@ Score.loadScores = function () {
   }
 };
 
-Score.saveScores = function () {
+Score.saveScores = function() {
   localStorage.setItem('scores', JSON.stringify(Score.instances));
 };
 
@@ -49,7 +47,7 @@ Score.clearScores = function() {
   Score.saveScores();
 }
 
-function sortScores () {
+function sortScores() {
   Score.instances.sort((a, b) => {
     if (a.score > b.score) {
       return -1;
@@ -70,7 +68,6 @@ function defaultScores() {
 
 function incrementScore(invader) {
   gameState.score += invader.pointsValue;
-  console.log(gameState.score);
   updateBannerScores();
 }
 
