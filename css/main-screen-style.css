@@ -41,45 +41,50 @@
   margin: 10px 0;
 }
 
-.start-screen * {}
-
 .start-screen .banner-invader {
-  margin: 10px 25px;
+  margin: 25px 25px;
 }
 
+
 .start-screen * {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 10px 0px;
 }
 
 .start-screen h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
+  margin-bottom: 45px;
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-bottom: 125px;
+}
+
+.menu-options li:hover {
+  list-style-image: url('../assets/invader-green_2px.png');
 }
 
 .menu-option {
   width: 250px;
-  height: 100px;
+  height: 75px;
   font-size: 1.2rem;
   border: none;
   background-color: transparent;
   color: #cccccc;
   text-decoration: none;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center;
+  justify-content: center; */
   cursor: default;
-}
-
-.menu-option:hover {
-  background-color: #242424;
 }
 
 .game-screen {
   box-sizing: border-box;
-  width: 450px;
+  width: 800px;
   height: 600px;
   background-color: #121212;
   position: relative;
