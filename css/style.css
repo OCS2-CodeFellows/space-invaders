@@ -35,6 +35,10 @@ a:visited {
   background-color: #363636;
 }
 
+.score-container {
+  user-select: none;
+}
+
 /* 
 .invader {
   position: absolute;
