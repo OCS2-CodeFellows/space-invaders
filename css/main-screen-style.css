@@ -1,28 +1,67 @@
-.start-screen {
+.start-screen,
+.game-over-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
   height: 100%;
+  width: 100%;
 }
 
-.start-screen * {
-  font-family: 'Courier New', Courier, monospace;
+.game-over-screen form,
+.game-over-screen label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.initials-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0px;
+}
+
+.input-initial {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  text-transform: uppercase;
+  color: #cccccc;
+  font-size: 3rem;
+  width: 1em;
+  text-decoration: underline;
+  overflow: visible;
+  margin: 0 .2em;
+}
+
+.game-over-screen button {
+  margin: 10px 0;
+}
+
+.start-screen * {}
 
 .start-screen .banner-invader {
   margin: 10px 25px;
 }
 
+.start-screen * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .start-screen h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 .menu-option {
   width: 250px;
   height: 100px;
-  font-size: 2rem;
+  font-size: 1.2rem;
   border: none;
   background-color: transparent;
   color: #cccccc;
@@ -49,4 +88,14 @@
 .player {
   position: absolute;
   bottom: 5px;
+}
+
+.score-banner {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+}
+
+.hidden {
+  display: none;
 }

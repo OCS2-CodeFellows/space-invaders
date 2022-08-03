@@ -2,25 +2,55 @@
 function InvaderBox() {
   this.element = createInvaderBox();
   this.rowCount = 4;
-  this.columnCount = 6;
+  this.columnCount = 5;
+  this.horizontalSteps = 2;
+  this.verticalSteps = 0;
+  this.stepDirection = constants.RIGHT;
 }
 
+
+
 InvaderBox.prototype.layoutInvaders = function() {
+  this.element.style.left = `${gameState.invaderStepSize * 2}px`
   for (let i = 0; i < Invader.instances.length; i++) {
     const invader = Invader.instances[i];
-    console.log(invader);
-    invader.element.style.top = `${70 * invader.position[0]}px`;
-    invader.element.style.left = `${85 * invader.position[1]}px`;
+    invader.element.style.top = `${52 * invader.position[0]}px`;
+    invader.element.style.left = `${68 * invader.position[1]}px`;
   }
+
 };
+
+InvaderBox.prototype.stepInvaders = function() {
+  const gameScreenBound = gameScreen.element.getBoundingClientRect();
+  const boxBound = this.element.getBoundingClientRect();
+  if (((boxBound.left - gameState.invaderStepSize) - (gameScreenBound.left)) <= 0) {
+    this.stepDirection = constants.RIGHT;
+    this.verticalSteps++;
+  } 
+  if ((gameScreenBound.right) - (boxBound.right + gameState.invaderStepSize) <= 0) {
+    this.stepDirection = constants.LEFT;
+    this.verticalSteps++;
+  }
+  if (this.stepDirection === constants.RIGHT) {
+    this.horizontalSteps++;
+  }
+  if (this.stepDirection === constants.LEFT) {
+    this.horizontalSteps--;
+  }
+
+  this.element.style.left = `${this.horizontalSteps * gameState.invaderStepSize}px`
+  this.element.style.top = `${52 + this.verticalSteps * (gameState.invaderStepSize * 2)}px`
+  // console.log(this.horizontalSteps)
+}
 
 function createInvaderBox() {
   const box = document.createElement('div');
   box.classList.add('invader-box');
-  box.style.width = '455px';
-  box.style.height = '220px';
+  box.style.width = '316px';
+  box.style.height = '188px';
   box.style.position = 'absolute';
 
   gameScreen.element.append(box);
   return box;
 }
+

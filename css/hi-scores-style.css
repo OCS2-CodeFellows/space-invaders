@@ -1,0 +1,26 @@
+.score-section {
+  background-color: #121212;
+  padding: 5rem;
+}
+
+.score-section {
+  box-sizing: border-box;
+  width: 450px;
+  height: 600px;
+  background-color: #121212;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.score-entry {
+  margin: 10px 0px;
+}
+
+.score-name,
+.score-value {
+  margin: 25px;
+}

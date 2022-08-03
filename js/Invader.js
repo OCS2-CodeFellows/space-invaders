@@ -13,8 +13,8 @@ function Invader(spriteNumber, pointsValue, position) {
 Invader.instances = [];
 
 Invader.prototype.updateCanvas = function(){
-  this.ctx.clearRect(0, 0, 55, 40);
-  this.ctx.drawImage(this.sourceImg, this.imgCoords[0], this.imgCoords[1], 55, 40, 0, 0, 55, 40);
+  this.ctx.clearRect(0, 0, 44, 32);
+  this.ctx.drawImage(this.sourceImg, this.imgCoords[0], this.imgCoords[1], 55, 40, 0, 0, 44, 32);
 };
 
 // This assumes that a sprite only has 2 "versions" right next to each other in the sprite sheet.
@@ -28,8 +28,8 @@ Invader.prototype.nextSprite = function(){
 
 function createInvaderCanvas(){
   const canvas = document.createElement('canvas');
-  canvas.width = 55;
-  canvas.height = 40;
+  canvas.width = 44;
+  canvas.height = 32;
   canvas.classList.add('invader');
   canvas.style.position = 'absolute';
   // Right now this grabs the single img element in the HTML.
@@ -44,3 +44,13 @@ function calculateSheetY(spriteNumber){
 
 // Maybe create a function that takes a string or an int and uses that to create an invader of a certain type with a random color.
 
+Invader.prototype.removeInvader = function() {
+  for (let i = 0; i < Invader.instances.length; i++) {
+    const checkInvader = Invader.instances[i];
+    if (this.element === checkInvader.element) {
+      this.collider.deleteCollider();
+      this.element.remove();
+      Invader.instances.splice(i, 1);
+    }
+  }
+};

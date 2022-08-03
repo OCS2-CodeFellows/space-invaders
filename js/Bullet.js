@@ -30,7 +30,7 @@ function createBulletCanvas(ship){
 
   const bulletCtx = canvas.getContext('2d');
   bulletCtx.fillStyle = '#cccccc';
-  bulletCtx.fillRect(0, 0, 5, 10);
+  bulletCtx.fillRect(0, 0, 3, 6);
 
   gameScreen.element.append(canvas);
   return canvas;
@@ -42,7 +42,7 @@ function getShipCenter(ship) {
   const shipRect = ship.element.getBoundingClientRect();
   const shipLeftSide = shipRect.left;
   const screenLeftSide = gameScreen.element.getBoundingClientRect().left;
-  const bulletSizeAdjustment = 2.5; // Bullets are 5px, so we'll adjust by 2.5px to better center the bullet.
+  const bulletSizeAdjustment = 1.5; // Bullets are 5px, so we'll adjust by 2.5px to better center the bullet.
   const shipSizeHalf = shipRect.width / 2;
 
   const center = shipLeftSide - screenLeftSide + shipSizeHalf - bulletSizeAdjustment;
