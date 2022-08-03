@@ -1,31 +1,47 @@
 'use strict';
+Score.loadScores();
+updateBannerScores();
 
-const invaderBox = new InvaderBox();
+let invaderBox = new InvaderBox();
 const player = new PlayerShip();
-new Invader(0, 10, [0, 0]);
-new Invader(1, 10, [0, 1]);
-new Invader(2, 10, [0, 2]);
-// new Invader(0, 10, [0, 3]);
-// new Invader(1, 10, [0, 4]);
-// new Invader(0, 10, [0, 5]);
-// new Invader(3, 10, [1, 0]);
-// new Invader(4, 10, [1, 1]);
-// new Invader(3, 10, [1, 2]);
-// new Invader(4, 10, [1, 3]);
-// new Invader(3, 10, [1, 4]);
-// new Invader(4, 10, [1, 5]);
-// new Invader(5, 10, [2, 0]);
-// new Invader(6, 10, [2, 1]);
-// new Invader(5, 10, [2, 2]);
-// new Invader(6, 10, [2, 3]);
-// new Invader(5, 10, [2, 4]);
-// new Invader(6, 10, [2, 5]);
 
 
-const startScreen = document.getElementById('startScreen');
-const startButton = document.getElementById('startButton');
+function spawnWave() {
+  invaderBox = new InvaderBox();
+  gameState.invaderSpeed *= .95;
+  gameState.invaderStepSize *= 1.1;
+  console.log("INVADER SPEED:", gameState.invaderSpeed)
+  console.log("INVADER STEP SIZE:", gameState.invaderStepSize)
+
+  // Remove old bullets when spawning in a new wave.
+  for (let bullet of Bullet.instances) {
+    bullet.removeBullet();
+  }
+
+  new Invader(0, 10, [0, 0]);
+  new Invader(0, 10, [0, 1]);
+  new Invader(0, 10, [0, 2]);
+  new Invader(0, 10, [0, 3]);
+  new Invader(0, 10, [0, 4]);
+  new Invader(4, 10, [1, 0]);
+  new Invader(4, 10, [1, 1]);
+  new Invader(4, 10, [1, 2]);
+  new Invader(4, 10, [1, 3]);
+  new Invader(4, 10, [1, 4]);
+  new Invader(6, 10, [2, 0]);
+  new Invader(6, 10, [2, 1]);
+  new Invader(6, 10, [2, 2]);
+  new Invader(6, 10, [2, 3]);
+  new Invader(6, 10, [2, 4]);
+  new Invader(2, 10, [3, 0]);
+  new Invader(2, 10, [3, 1]);
+  new Invader(2, 10, [3, 2]);
+  new Invader(2, 10, [3, 3]);
+  new Invader(2, 10, [3, 4]);
+  invaderBox.layoutInvaders();
+}
+
 // Start the animation loop
-startButton.addEventListener('click', startGame);
 // render();
 
 // Keydown
@@ -36,6 +52,9 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.key === 'd' || e.key === 'ArrowRight') {
       player.move('right');
+    }
+    if (e.key === 'Enter') {
+      endGame()
     }
   }
 });
@@ -72,6 +91,10 @@ window.addEventListener('keydown', (e) => {
 
 // This function runs on every frame.
 function animationFrame(timestamp) {
+  if (Invader.instances.length <= 0) {
+    spawnWave();
+    console.log("WAVE")
+  }
   animationState.done = false;
   // console.log("TIMESTAMP", timestamp)
   const screenRect = gameScreen.element.getBoundingClientRect();
@@ -97,11 +120,14 @@ function animationFrame(timestamp) {
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
 
-    if (timestamp - animationState.previousTimestamp >= 500) {
+    // Executes the code block once every (gameState.invaderSpeed)ms
+    if (timestamp - animationState.previousTimestamp >= gameState.invaderSpeed) {
       animationState.previousTimestamp = timestamp;
       for (let invader of Invader.instances) {
         invader.nextSprite();
       }
+      invaderBox.stepInvaders();
+      // console.log(invaderBox.horizontalSteps)
     }
     player.updateCanvas();
     for (let invader of Invader.instances) {
@@ -126,14 +152,23 @@ function animationFrame(timestamp) {
     if (collision) {
       for (let collider of collision) {
         // Check if one of the colliders in a collision is a bullet
-        if (collider.element.classList.contains('bullet')){
+        if (collider.element.classList.contains('bullet')) {
           for (let bullet of Bullet.instances) {
             if (collider.element === bullet.element) {
               bullet.removeBullet();
             }
           }
         }
-        // TODO: Check if one of the colliders in a collision is an invader (INVADER BULLETS SHOULD PASS THROUGH OTHER INVADERS)
+        if (collider.element.classList.contains('invader')) {
+          for (let invader of Invader.instances) {
+            if (collider.element === invader.element) {
+              console.log('collider', collider.element);
+              console.log('invader', invader.element);
+              incrementScore(invader);
+              invader.removeInvader();
+            }
+          }
+        }
 
         // TODO: Check if one of the colliders in a collision is the player
       }
@@ -148,13 +183,39 @@ function animationFrame(timestamp) {
   }
 }
 
-function startGame() {
-  startScreen.style.display = 'none';
-  invaderBox.layoutInvaders();
-  render();
-
+function endGame() {
+  animationState.done = true;
+  gameOverScreen.classList.remove('hidden');
 }
+
+
 
 function render() {
   window.requestAnimationFrame(animationFrame);
 }
+
+
+const initialsForm = document.forms.initialsForm;
+
+function submitScore(event) {
+  let playerInitials = '';
+  const initialsInputs = document.querySelectorAll('.input-initial')
+  for (let initial of initialsInputs) {
+    playerInitials += initial.value.toUpperCase();
+  }
+  Score.addScore(playerInitials, gameState.score);
+  Score.saveScores();
+}
+
+initialsForm.addEventListener('submit', submitScore)
+initialsForm.addEventListener('input', (e) => {
+  if (e.target.nextElementSibling) {
+    e.target.nextElementSibling.focus();
+  } else {
+    initialsForm.submitButton.focus();
+  }
+})
+// initialsInput.addEventListener('input', (e) => {
+// console.log(e)
+// })
+render();

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main-screen-style.css">
+  <script src="js/Collider.js" defer></script>
+  <script src="js/consts.js" defer></script>
+  <script src="js/Score.js" defer></script>
+  <script src="js/invader-box.js" defer></script>
+  <script src="js/Player.js" defer></script>
+  <script src="js/Bullet.js" defer></script>
+  <script src="js/Invader.js" defer></script>
+  <script src="js/play.js" defer></script>
+  <title>Space Invaders</title>
+</head>
+
+<body>
+  <header>
+    <!-- <h1>Space Invaders</h1> -->
+  </header>
+  <main>
+    <div class="game-screen" id="gameScreen">
+      <section class="score-banner" id="scoreBanner">
+        <div class="score-container">
+          <h3 class="score-label">P1</h3>
+          <p class="score-value" id="currentScoreDisplay">000000</p>
+        </div>
+        <div class="score-container">
+          <h3 class="score-label">Top</h3>
+          <p class="score-value" id="hiScoreDisplay">000000</p>
+        </div>
+      </section>
+      <div style="display: none;">
+        <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
+        <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
+      </div>
+      <section id="gameOverScreen" class="game-over-screen hidden">
+        <h2>GAME OVER</h2>
+        <form action="index.html" id="initialsForm" name="initialsForm">
+          <label>Enter Your Initials
+            <div class="initials-input-container" id="initialsInputContainer">
+              <input type="text" name="initialOne" id="initialOne" class="input-initial" maxlength="1">
+              <input type="text" name="initialTwo" id="initialTwo" class="input-initial" maxlength="1">
+              <input type="text" name="initialThree" id="initialThree" class="input-initial" maxlength="1">
+            </div>
+          </label>
+          <button type="submit" id="submitButton">Submit</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
