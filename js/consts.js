@@ -1,6 +1,11 @@
 'use strict';
 /* exported constants, animationState, gameState, gameScreen */
 
+const startScreen = document.getElementById('startScreen');
+const startButton = document.getElementById('startButton');
+const gameOverScreen = document.getElementById('gameOverScreen');
+const currentScoreBanner = document.getElementById('currentScoreDisplay');
+const hiScoreBanner = document.getElementById('hiScoreDisplay');
 
 const gameScreen = {
   element: document.getElementById('gameScreen'),

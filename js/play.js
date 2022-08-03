@@ -9,27 +9,17 @@ new Invader(1, 10, [0, 1]);
 new Invader(2, 10, [0, 2]);
 new Invader(0, 10, [0, 3]);
 new Invader(1, 10, [0, 4]);
-new Invader(0, 10, [0, 5]);
 new Invader(3, 10, [1, 0]);
 new Invader(4, 10, [1, 1]);
 new Invader(3, 10, [1, 2]);
 new Invader(4, 10, [1, 3]);
 new Invader(3, 10, [1, 4]);
-new Invader(4, 10, [1, 5]);
 new Invader(5, 10, [2, 0]);
 new Invader(6, 10, [2, 1]);
 new Invader(5, 10, [2, 2]);
 new Invader(6, 10, [2, 3]);
 new Invader(5, 10, [2, 4]);
-new Invader(6, 10, [2, 5]);
 
-
-const startScreen = document.getElementById('startScreen');
-const startButton = document.getElementById('startButton');
-const gameOverScreen = document.getElementById('gameOverScreen');
-const currentScoreBanner = document.getElementById('currentScoreDisplay');
-const hiScoreBanner = document.getElementById('hiScoreDisplay');
-const nameForm = document.forms.playerName;
 // Start the animation loop
 // render();
 
@@ -171,33 +161,36 @@ function endGame() {
   gameOverScreen.classList.remove('hidden');
 }
 
-function submitName(event) {
-  const initials = event.target.inputInitials.value;
-  Score.addScore(initials, gameState.score)
-  Score.saveScores();
 
-}
 
 function render() {
   window.requestAnimationFrame(animationFrame);
 }
 
-function incrementScore(invader) {
-  gameState.score += invader.pointsValue;
-  console.log(gameState.score);
-  updateGameScreenScores();
-}
 
-function updateGameScreenScores() {
-  
-  if(gameState.score >= Score.instances[0].score){
-    hiScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
-  } else {
-    hiScoreBanner.innerText = `${Score.instances[0].score}`.padStart(6, '0');
+const initialsForm = document.forms.initialsForm;
+const initialsInput = document.forms.initialsForm.inputInitials;
+
+function submitScore(event) {
+  let playerInitials = '';
+  const initialsInputs = document.querySelectorAll('.input-initial')
+  for (let initial of initialsInputs) {
+    playerInitials += initial.value.toUpperCase();
   }
-  currentScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
+  Score.addScore(playerInitials, gameState.score);
+  Score.saveScores();
 }
 
-nameForm.addEventListener('submit', submitName)
+initialsForm.addEventListener('submit', submitScore)
+initialsForm.addEventListener('input', (e) => {
+  if (e.target.nextElementSibling) {
+    e.target.nextElementSibling.focus()
+  } else {
+    initialsForm.submitButton.focus()
+  }
+})
+// initialsInput.addEventListener('input', (e) => {
+// console.log(e)
+// })
 invaderBox.layoutInvaders();
 render();
