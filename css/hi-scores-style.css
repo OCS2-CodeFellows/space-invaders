@@ -1,13 +1,26 @@
 .score-section {
   background-color: #121212;
-  padding: 5rem;
+  /* padding: 5rem; */
+}
+
+.hiscore-screen h1 {
+  font-size: 2rem;
+}
+
+.hiscore-screen {
+  box-sizing: border-box;
+  width: 800px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  position: relative;
 }
 
 .score-section {
   box-sizing: border-box;
-  width: 800px;
-  height: 600px;
-  background-color: #121212;
   position: relative;
   display: flex;
   flex-direction: column;
