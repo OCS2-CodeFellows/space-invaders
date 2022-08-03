@@ -1,33 +1,36 @@
 'use strict';
+Score.loadScores();
 
 const invaderBox = new InvaderBox();
 const player = new PlayerShip();
 new Invader(0, 10, [0, 0]);
 new Invader(1, 10, [0, 1]);
 new Invader(2, 10, [0, 2]);
-// new Invader(0, 10, [0, 3]);
-// new Invader(1, 10, [0, 4]);
-// new Invader(0, 10, [0, 5]);
-// new Invader(3, 10, [1, 0]);
-// new Invader(4, 10, [1, 1]);
-// new Invader(3, 10, [1, 2]);
-// new Invader(4, 10, [1, 3]);
-// new Invader(3, 10, [1, 4]);
-// new Invader(4, 10, [1, 5]);
-// new Invader(5, 10, [2, 0]);
-// new Invader(6, 10, [2, 1]);
-// new Invader(5, 10, [2, 2]);
-// new Invader(6, 10, [2, 3]);
-// new Invader(5, 10, [2, 4]);
-// new Invader(6, 10, [2, 5]);
+new Invader(0, 10, [0, 3]);
+new Invader(1, 10, [0, 4]);
+new Invader(0, 10, [0, 5]);
+new Invader(3, 10, [1, 0]);
+new Invader(4, 10, [1, 1]);
+new Invader(3, 10, [1, 2]);
+new Invader(4, 10, [1, 3]);
+new Invader(3, 10, [1, 4]);
+new Invader(4, 10, [1, 5]);
+new Invader(5, 10, [2, 0]);
+new Invader(6, 10, [2, 1]);
+new Invader(5, 10, [2, 2]);
+new Invader(6, 10, [2, 3]);
+new Invader(5, 10, [2, 4]);
+new Invader(6, 10, [2, 5]);
 
 
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const inputScreen = document.getElementById('inputScreen');
+const currentScoreBanner = document.getElementById('currentScoreDisplay');
+const hiScoreBanner = document.getElementById('hiScoreDisplay');
 const nameForm = document.forms.playerName;
+const submitLink = document.getElementById('submitName')
 // Start the animation loop
-startButton.addEventListener('click', startGame);
 // render();
 
 // Keydown
@@ -131,10 +134,20 @@ function animationFrame(timestamp) {
     if (collision) {
       for (let collider of collision) {
         // Check if one of the colliders in a collision is a bullet
-        if (collider.element.classList.contains('bullet')){
+        if (collider.element.classList.contains('bullet')) {
           for (let bullet of Bullet.instances) {
             if (collider.element === bullet.element) {
               bullet.removeBullet();
+            }
+          }
+        }
+        if (collider.element.classList.contains('invader')) {
+          for (let invader of Invader.instances) {
+            if (collider.element === invader.element) {
+              console.log('collider', collider.element);
+              console.log('invader', invader.element);
+              incrementScore(invader);
+              invader.removeInvader();
             }
           }
         }
@@ -153,22 +166,36 @@ function animationFrame(timestamp) {
   }
 }
 
-function startGame() {
-  startScreen.classList.add('hidden');
-  invaderBox.layoutInvaders();
-  render();
-}
-
 function endGame() {
   animationState.done = true;
   inputScreen.classList.remove('hidden');
 }
 
 function submitName(event) {
-  event.preventDefault();
-  console.log("do stuff")
+  Score.addScore('test', 500000)
+  Score.saveScores();
+
 }
 
 function render() {
   window.requestAnimationFrame(animationFrame);
 }
+
+function incrementScore(invader) {
+  gameState.score += invader.pointsValue;
+  console.log(gameState.score);
+  updateGameScreenScores();
+}
+
+function updateGameScreenScores() {
+  
+  if(gameState.score >= Score.instances[0].score){
+    hiScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
+  } else {
+    hiScoreBanner.innerText = `${Score.instances[0].score}`.padStart(6, '0');
+  }
+  currentScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
+}
+submitLink.addEventListener('click', submitName)
+invaderBox.layoutInvaders();
+render();

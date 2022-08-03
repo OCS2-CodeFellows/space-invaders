@@ -44,3 +44,13 @@ function calculateSheetY(spriteNumber){
 
 // Maybe create a function that takes a string or an int and uses that to create an invader of a certain type with a random color.
 
+Invader.prototype.removeInvader = function() {
+  for (let i = 0; i < Invader.instances.length; i++) {
+    const checkInvader = Invader.instances[i];
+    if (this.element === checkInvader.element) {
+      this.collider.deleteCollider();
+      this.element.remove();
+      Invader.instances.splice(i, 1);
+    }
+  }
+};
