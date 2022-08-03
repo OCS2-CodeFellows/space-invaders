@@ -24,6 +24,8 @@ new Invader(2, 10, [0, 2]);
 
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
+const inputScreen = document.getElementById('inputScreen');
+const nameForm = document.forms.playerName;
 // Start the animation loop
 startButton.addEventListener('click', startGame);
 // render();
@@ -36,6 +38,9 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.key === 'd' || e.key === 'ArrowRight') {
       player.move('right');
+    }
+    if (e.key === 'Enter') {
+      endGame()
     }
   }
 });
@@ -149,10 +154,19 @@ function animationFrame(timestamp) {
 }
 
 function startGame() {
-  startScreen.style.display = 'none';
+  startScreen.classList.add('hidden');
   invaderBox.layoutInvaders();
   render();
+}
 
+function endGame() {
+  animationState.done = true;
+  inputScreen.classList.remove('hidden');
+}
+
+function submitName(event) {
+  event.preventDefault();
+  console.log("do stuff")
 }
 
 function render() {
