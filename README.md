@@ -1,13 +1,17 @@
-# final-project
+# Space Invaders
+
+![hello](invader-gh-banner.png)
+
+A web-based recreation of the 1978 Arcade Classic *Space Invaders*.
 
 ## Notes
 
 ## Contributors
 
-- Daniel Shiraishi
-- Robert Shepley
-- Timothee Odushina
-- Alan Chelko
+- [Daniel Shiraishi](https://github.com/KaliFox20)
+- [Robert Shepley](https://github.com/ShepleySound)
+- [Timothee Odushina](https://github.com/timothee2022)
+- [Alan Chelko](https://github.com/dtuskippy)
 
 
 ## Domain Model, Object Constructors
