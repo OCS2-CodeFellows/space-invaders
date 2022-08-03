@@ -69,5 +69,3 @@ function updateBannerScores() {
   }
   currentScoreBanner.innerText = `${gameState.score}`.padStart(6, '0');
 }
-
-// console.log(Score.instances);

@@ -7,16 +7,21 @@ const player = new PlayerShip();
 
 
 function spawnWave() {
-  invaderBox = new InvaderBox();
-  gameState.invaderSpeed *= .95;
-  gameState.invaderStepSize *= 1.05;
-  console.log("INVADER SPEED:", gameState.invaderSpeed)
-  console.log("INVADER STEP SIZE:", gameState.invaderStepSize)
-
-  // Remove old bullets when spawning in a new wave.
   for (let bullet of Bullet.instances) {
     bullet.removeBullet();
   }
+
+  for (let box of InvaderBox.instances) {
+    box.removeInvaderBox();
+  }
+
+  invaderBox = new InvaderBox();
+  gameState.invaderSpeed *= .95;
+  gameState.invaderStepSize *= 1.05;
+  // console.log("INVADER SPEED:", gameState.invaderSpeed);
+  // console.log("INVADER STEP SIZE:", gameState.invaderStepSize);
+
+  // Remove old bullets when spawning in a new wave.
 
   new Invader(0, 10, [0, 0]);
   new Invader(0, 10, [0, 1]);
@@ -41,11 +46,8 @@ function spawnWave() {
   invaderBox.layoutInvaders();
 }
 
-// Start the animation loop
-// render();
 
-// Keydown
-
+// keydown handler
 function handleActions(e) {
   if (!e.repeat) {
     if (e.key === 'a' || e.key === 'ArrowLeft') {
@@ -62,7 +64,7 @@ function handleActions(e) {
     }
   }
 }
-
+// keyup handler
 function handleStop(e) {
   const screenBound = gameScreen.element.getBoundingClientRect();
   if (e.key === 'a' || e.key === 'ArrowLeft') {
@@ -80,33 +82,22 @@ window.addEventListener('keydown', handleActions);
 window.addEventListener('keyup', handleStop);
 
 
-// Main Loop.
 // This function runs on every frame.
 function animationFrame(timestamp) {
   if (Invader.instances.length <= 0) {
     spawnWave();
   }
-  // console.log("TIMESTAMP", timestamp)
   const screenBound = gameScreen.element.getBoundingClientRect();
-
-  // if (animationState.reset) {
-  //   animationState.start = timestamp;
-  // }
-
-  // Later this should loop over everything on the screen that needs to be animated/moved. Not just bullets
-  // It sets the start time of the object's animation so that we can compare it to a GLOBAL timestamp for elapsed time
 
   for (let bullet of Bullet.instances) {
     if (bullet.animationStart === undefined) {
       bullet.animationStart = timestamp;
     }
   }
-  // if (animationState.start === undefined) {
-  //   animationState.start = timestamp;
-  // }
+  if (animationState.start === undefined) {
+    animationState.start = timestamp;
+  }
 
-  // console.log("PREVIOUS", animationState.previousTimestamp)
-  // console.log("CURRENT", timestamp)
   // This is our "main loop", where all the actual animation/check work should be done.
   if (animationState.previousTimestamp !== timestamp) {
 
@@ -117,7 +108,6 @@ function animationFrame(timestamp) {
         invader.nextSprite();
       }
       invaderBox.stepInvaders();
-      // console.log(invaderBox.horizontalSteps)
     }
     player.updateCanvas();
     for (let invader of Invader.instances) {
@@ -129,9 +119,6 @@ function animationFrame(timestamp) {
       const count = Math.min(40 + (.5 * elapsed), 1000); // Sets speed of bullets and ensures they only move 1000px;
       const bulletRect = bullet.element.getBoundingClientRect();
 
-      // console.log(elapsed);
-      // console.log(count);
-      // console.log("COUNT", count);
       bullet.element.style.bottom = `${count}px`;
       if (bulletRect.top <= screenBound.top) {
         bullet.removeBullet();
@@ -171,15 +158,6 @@ function animationFrame(timestamp) {
   }
 }
 
-// TODO: Check if one of the colliders in a collision is the player
-
-
-// if (!bullets.length) animationState.done = true;
-
-// if (elapsed < 1000)
-// animationState.previousTimestamp = timestamp;
-
-
 function endGame() {
   console.log('GAME OVER');
   animationState.done = true;
@@ -192,7 +170,6 @@ function endGame() {
 function render() {
   window.requestAnimationFrame(animationFrame);
 }
-
 
 const initialsForm = document.forms.initialsForm;
 
@@ -214,7 +191,5 @@ initialsForm.addEventListener('input', (e) => {
     initialsForm.submitButton.focus();
   }
 });
-// initialsInput.addEventListener('input', (e) => {
-// console.log(e)
-// })
+
 render();
