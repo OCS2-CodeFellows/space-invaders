@@ -10,8 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main-screen-style.css">
+  <script src="js/Collider.js" defer></script>
   <script src="js/consts.js" defer></script>
   <script src="js/storage.js" defer></script>
+  <script src="js/invader-box.js" defer></script>
+  <script src="js/draw-ship.js" defer></script>
+  <script src="js/draw-bullet.js" defer></script>
+  <script src="js/Invader.js" defer></script>
+  <script src="js/app.js" defer></script>
   <title>Space Invaders</title>
 </head>
 
@@ -31,18 +37,20 @@
           <p class="score-value" id="hiScoreDisplay">100000000</p>
         </div>
       </section>
-      <section class="start-screen" id="startScreen">
-        <div class="start-invader-banner">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
-          <img src="assets/red-invader-5px.png" alt="" class="banner-invader">
-        </div>
-        <h1>Space Invaders</h1>
-        <a href="play.html" id="startButton" class="menu-option">Start Game</a>
-        <a href="hi-scores.html" id="highScores" class="menu-option">Hi-Scores</a>
-        <a href="credits.html" class="menu-option">Credits</a>
+      <div style="display: none;">
+        <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
+        <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
+      </div>
+      <section id="inputScreen" class="input-screen hidden">
+        <form id="playerName" name="playerName">
+          <label>Enter Your Initials
+            <input type="text" name="inputName" id="inputName" maxlength="3">
+          </label>
+          <a href="index.html" id="submitName">Submit
+          </a>
+        </form>
       </section>
-      
+    </div>
   </main>
   <footer>
 
