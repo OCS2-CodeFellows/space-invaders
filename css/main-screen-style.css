@@ -1,5 +1,5 @@
 .start-screen,
-.input-screen {
+.game-over-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,14 +9,36 @@
   width: 100%;
 }
 
-.input-screen form,
-.input-screen label {
+.game-over-screen form,
+.game-over-screen label {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
+.initials-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0px;
+}
 
+.input-initial {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  text-transform: uppercase;
+  color: #cccccc;
+  font-size: 3rem;
+  width: 1em;
+  text-decoration: underline;
+  overflow: visible;
+  margin: 0 .2em;
+}
+
+.game-over-screen button {
+  margin: 10px 0;
 }
 
 .start-screen * {}

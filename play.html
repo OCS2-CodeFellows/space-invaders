@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="css/main-screen-style.css">
   <script src="js/Collider.js" defer></script>
   <script src="js/consts.js" defer></script>
-  <script src="js/storage.js" defer></script>
+  <script src="js/Score.js" defer></script>
   <script src="js/invader-box.js" defer></script>
-  <script src="js/draw-ship.js" defer></script>
-  <script src="js/draw-bullet.js" defer></script>
+  <script src="js/Player.js" defer></script>
+  <script src="js/Bullet.js" defer></script>
   <script src="js/Invader.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <script src="js/play.js" defer></script>
   <title>Space Invaders</title>
 </head>
 
@@ -30,24 +30,28 @@
       <section class="score-banner" id="scoreBanner">
         <div class="score-container">
           <h3 class="score-label">P1</h3>
-          <p class="score-value" id="currentScoreDisplay">500</p>
+          <p class="score-value" id="currentScoreDisplay">000000</p>
         </div>
         <div class="score-container">
           <h3 class="score-label">Top</h3>
-          <p class="score-value" id="hiScoreDisplay">100000000</p>
+          <p class="score-value" id="hiScoreDisplay">000000</p>
         </div>
       </section>
       <div style="display: none;">
         <img id="invaderSource" src="assets/sprite-sheet-5px.png" width="115" height="310" alt="">
         <img id="playerSource" src="assets/player-ship-5px.png" width="55" height="35" alt="">
       </div>
-      <section id="inputScreen" class="input-screen hidden">
-        <form id="playerName" name="playerName">
+      <section id="gameOverScreen" class="game-over-screen hidden">
+        <h2>GAME OVER</h2>
+        <form action="index.html" id="initialsForm" name="initialsForm">
           <label>Enter Your Initials
-            <input type="text" name="inputName" id="inputName" maxlength="3">
+            <div class="initials-input-container" id="initialsInputContainer">
+              <input type="text" name="initialOne" id="initialOne" class="input-initial" maxlength="1">
+              <input type="text" name="initialTwo" id="initialTwo" class="input-initial" maxlength="1">
+              <input type="text" name="initialThree" id="initialThree" class="input-initial" maxlength="1">
+            </div>
           </label>
-          <a href="index.html" id="submitName">Submit
-          </a>
+          <button type="submit" id="submitButton">Submit</button>
         </form>
       </section>
     </div>

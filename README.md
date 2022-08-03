@@ -1,9 +1,12 @@
 # final-project
 
-## Team Members
+
+![Domain Modeling](docs/domain-modeling.png)
+
+## Notes
+
+## Contributors
 - Daniel Shiraishi
 - Robert Shepley
 - Timothee Odushina
 - Alan Chelko
-
-![Domain Modeling](domain-modeling.png)
