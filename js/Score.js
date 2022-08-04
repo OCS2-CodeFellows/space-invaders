@@ -6,8 +6,8 @@ function Score(initials, score) {
   if (Score.instances.length < 10) {
     Score.instances.push(this);
   } else if (score > Score.instances.at(-1).score) {
-    new Score(initials, score);
     Score.instances.pop();
+    Score.instances.push(this)
   }
   sortScores();
 }
@@ -50,10 +50,16 @@ function sortScores() {
 }
 
 function defaultScores() {
-  new Score('AXC', 40);
-  new Score('TOO', 30);
-  new Score('RCS', 20);
-  new Score('DJS', 10);
+  new Score('AXC', 2000);
+  new Score('TOO', 1500);
+  new Score('RCS', 1230);
+  new Score('DJS', 1060);
+  new Score('ARC', 890);
+  new Score('COM', 880);
+  new Score('PRO', 600);
+  new Score('URL', 590);
+  new Score('UFO', 550);
+  new Score('AXC', 100);
 }
 
 // eslint-disable-next-line no-unused-vars

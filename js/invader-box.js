@@ -2,7 +2,7 @@
 function InvaderBox() {
   this.element = createInvaderBox();
   this.rowCount = 4;
-  this.columnCount = 5;
+  this.columnCount = 6;
   this.horizontalSteps = 2;
   this.verticalSteps = 0;
   this.stepDirection = constants.RIGHT;
@@ -20,7 +20,6 @@ InvaderBox.prototype.layoutInvaders = function() {
     invader.element.style.top = `${52 * invader.position[0]}px`;
     invader.element.style.left = `${68 * invader.position[1]}px`;
   }
-
 };
 
 InvaderBox.prototype.stepInvaders = function() {
@@ -60,7 +59,7 @@ InvaderBox.prototype.removeInvaderBox = function() {
 function createInvaderBox() {
   const box = document.createElement('div');
   box.classList.add('invader-box');
-  box.style.width = '316px';
+  box.style.width = '384px';
   box.style.height = '188px';
   box.style.position = 'absolute';
 

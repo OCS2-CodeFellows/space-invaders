@@ -17,6 +17,14 @@
   align-items: center;
 }
 
+.game-over-screen h2 {
+  font-size: 2rem;
+}
+
+.game-over-screen label {
+  font-size: 1.5rem;
+}
+
 .initials-input-container {
   display: flex;
   justify-content: center;
