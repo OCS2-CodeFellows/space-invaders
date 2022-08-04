@@ -53,6 +53,9 @@ function spawnWave() {
 
 // keydown handler
 function handleActions(e) {
+  if(e.key === ' ') {
+    e.preventDefault();
+  }
   if (!e.repeat) {
     if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.move('left');
