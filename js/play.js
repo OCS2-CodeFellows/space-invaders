@@ -16,8 +16,8 @@ function spawnWave() {
   }
 
   invaderBox = new InvaderBox();
-  gameState.invaderSpeed *= .90;
-  gameState.invaderStepSize *= 1.05;
+  gameState.invaderSpeed *= .70;
+  gameState.invaderStepSize *= 1.25;
   // console.log("INVADER SPEED:", gameState.invaderSpeed);
   // console.log("INVADER STEP SIZE:", gameState.invaderStepSize);
 
