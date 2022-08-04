@@ -7,7 +7,7 @@ function Score(initials, score) {
     Score.instances.push(this);
   } else if (score > Score.instances.at(-1).score) {
     Score.instances.pop();
-    Score.instances.push(this)
+    Score.instances.push(this);
   }
   sortScores();
 }
