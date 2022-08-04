@@ -13,7 +13,6 @@ A web-based recreation of the 1978 Arcade Classic *Space Invaders*.
 - [Timothee Odushina](https://github.com/timothee2022)
 - [Alan Chelko](https://github.com/dtuskippy)
 
-
 ## Domain Model, Object Constructors
 
 ```mermaid

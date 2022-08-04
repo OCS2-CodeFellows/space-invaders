@@ -16,8 +16,8 @@ function spawnWave() {
   }
 
   invaderBox = new InvaderBox();
-  gameState.invaderSpeed *= .95;
-  gameState.invaderStepSize *= 1.05;
+  gameState.invaderSpeed *= .70;
+  gameState.invaderStepSize *= 1.25;
   // console.log("INVADER SPEED:", gameState.invaderSpeed);
   // console.log("INVADER STEP SIZE:", gameState.invaderStepSize);
 
@@ -28,27 +28,34 @@ function spawnWave() {
   new Invader(0, 10, [0, 2]);
   new Invader(0, 10, [0, 3]);
   new Invader(0, 10, [0, 4]);
+  new Invader(0, 10, [0, 5]);
   new Invader(3, 10, [1, 0]);
   new Invader(4, 10, [1, 1]);
   new Invader(3, 10, [1, 2]);
   new Invader(4, 10, [1, 3]);
   new Invader(3, 10, [1, 4]);
+  new Invader(4, 10, [1, 5]);
   new Invader(6, 10, [2, 0]);
   new Invader(6, 10, [2, 1]);
   new Invader(6, 10, [2, 2]);
   new Invader(6, 10, [2, 3]);
   new Invader(6, 10, [2, 4]);
+  new Invader(6, 10, [2, 5]);
   new Invader(1, 10, [3, 0]);
   new Invader(2, 10, [3, 1]);
   new Invader(1, 10, [3, 2]);
   new Invader(2, 10, [3, 3]);
   new Invader(1, 10, [3, 4]);
+  new Invader(2, 10, [3, 5]);
   invaderBox.layoutInvaders();
 }
 
 
 // keydown handler
 function handleActions(e) {
+  if(e.key === ' ') {
+    e.preventDefault();
+  }
   if (!e.repeat) {
     if (e.key === 'a' || e.key === 'ArrowLeft') {
       player.move('left');
