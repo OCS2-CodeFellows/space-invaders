@@ -50,9 +50,9 @@ function sortScores() {
 }
 
 function defaultScores() {
-  new Score('AXC', 2000);
-  new Score('TOO', 1500);
-  new Score('RCS', 1230);
+  new Score('AXC', 1150);
+  new Score('TOO', 1120);
+  new Score('RCS', 1100);
   new Score('DJS', 1060);
   new Score('ARC', 890);
   new Score('COM', 880);
